@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/eachFeaturesName"
+        tools:text="@string/balance"
+        android:textSize="30sp"
+        android:background="@drawable/text_background"
+        android:textColor="#000"
+        tools:textSize="20sp"
+        android:padding="20dp"
+        android:gravity="center"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/eachRelativeLayout"
+        android:gravity="center"
+        android:padding="20dp"
+        android:visibility="gone"
+
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/balance_info"
+            android:gravity="center"
+            android:layout_marginTop="3dp"
+            android:textSize="20sp"
+            android:textColor="#DF0B0B"
+            android:id="@+id/eachRelativeLayoutFeatures"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eachRelativeLayoutFeatures"
+            android:gravity="center"
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ncellCallButton"
+                android:text="@string/ncell"
+                android:drawableRight="@drawable/ic_call_black_24dp"
+                android:layout_below="@id/eachRelativeLayoutFeatures"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:padding="3dp"
+                android:layout_marginRight="10dp"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ntcCallButton"
+                android:text="@string/ntc"
+                android:drawableRight="@drawable/ic_call_black_24dp"
+                android:layout_below="@id/eachRelativeLayoutFeatures"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:padding="3dp"
+                android:layout_marginLeft="10dp"
+
+                />
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

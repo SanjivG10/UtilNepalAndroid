@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">UtilNepal</string>
+    <string name="nepali_keyboard"> Nepali Keyboard</string>
+    <string name="subtype_en_NP">Nepali (np)</string>
+    <string name="balance"> पैसा चेक गर्नुहोस   </string>
+    <string name="balance_info"> सिममा कती पैसा छ चेक गर्नु होस  </string>
+    <string name="mobile_number"> मोबाईल नम्बर चेक </string>
+    <string name="mobile_number_info"> आफ्नो मोबाईल नम्बर चेक गर्नुहोस   </string>
+    <string name="data_pack"> डाटा प्याक  </string>
+    <string name="data_pack_info"> डाटा प्याक लिनुहोस  </string>
+    <string name="call_forward"> कल फोर्वार्ड चेक   </string>
+    <string name="call_forward_info"> यो नम्बरले कुन नम्बरमा कल फोर्वार्ड गरेको छ हेर्नुहोस  </string>
+    <string name="ncell">एन्सेल </string>
+    <string name="ntc">एन्टीसी  </string>
+    <string name="emergency">Emergency</string>
+
+    <!--  for emergency Numbers -->
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeEmergency">पुलिस ईमर्जेन्सी नम्बर</string>
+    <string name="kathmanduPolice"> काठमाडौं पुलिस   </string>
+    <string name="lalitpurPolice"> ललितपुर पुलिस   </string>
+    <string name="bhaktapurPolice">भक्तपुर पुलिस   </string>
+    <string name="paropkarAmbulance">परोपकर अएम्बुलेन्स   </string>
+    <string name="lalitpurRedCrossAmbulance">ललितपुर रेडक्रस अएम्बुलेन्स   </string>
+    <string name="bishalBazaarRedCrossAmbulance">बिशाल बजार रेडक्रस अएम्बुलेन्स   </string>
+    <string name="redCrossAmbulance">रेडक्रस अएम्बुलेन्स   </string>
+    <string name="agarwalSewaCenter">अग्रवल सेवा सेन्टर </string>
+    <string name="aasaraRehabilitationCenter">आसरा ड्रुग रीह्यबिलिटेसन सेन्टर  </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+    <string name="policeControl">पुलिस कन्ट्रोल </string>
+
+</resources>
