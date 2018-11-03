@@ -18,20 +18,8 @@
         </activity>
         <activity android:name=".MainActivity" />
 
-        <service
-            android:name=".NepaliKeyboard"
-            android:label="@string/nepali_keyboard"
-            android:permission="android.permission.BIND_INPUT_METHOD">
-            <meta-data
-                android:name="android.view.im"
-                android:resource="@xml/keyboard" />
-
-            <intent-filter>
-                <action android:name="android.view.InputMethod" />
-            </intent-filter>
-        </service>
-
-        <activity android:name=".MobileHelp.ActivitiesFragment.MobileActivity"></activity>
+        <activity android:name=".MobileHelp.ActivitiesFragment.MobileActivity" />
+        <activity android:name=".Trending.TrendingActivity"></activity>
     </application>
 
 </manifest>

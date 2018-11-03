@@ -23,7 +23,7 @@ public class EmergencyNumberAdapter extends RecyclerView.Adapter<EmergencyNumber
 
     public EmergencyNumberAdapter(ArrayList <EmergencyNumberFeatures> features, Context c)
     {
-        features = emergencyNumbers;
+        emergencyNumbers = features;
         this.c = c;
     }
 
@@ -33,7 +33,6 @@ public class EmergencyNumberAdapter extends RecyclerView.Adapter<EmergencyNumber
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(c).inflate(R.layout.emergency_numbers,viewGroup,false);
-
         return new EmergencyNumberAdapter.MyViewHolder(v);
     }
 

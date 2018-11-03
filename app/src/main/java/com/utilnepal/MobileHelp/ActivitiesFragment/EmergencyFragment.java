@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.utilnepal.MainActivity;
 import com.utilnepal.MobileHelp.Files.EmergencyNumberFeatures;
 import com.utilnepal.MobileHelp.Files.MiscellaneousNumberFeatures;
 import com.utilnepal.MobileHelp.adapters.EmergencyNumberAdapter;
 import com.utilnepal.MobileHelp.adapters.MiscellaneousNumberAdapter;
+import com.utilnepal.MobileHelp.data.EmergencyNumbersGenerator;
 import com.utilnepal.R;
 
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class EmergencyFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_emergency, container, false);
         emergencyNumberRecyclerView = v.findViewById(R.id.emergencyNumberRecyclerView);
-        emergencyNumberAdapter = new EmergencyNumberAdapter(addFeatures(),getContext());
+        emergencyNumberAdapter = new EmergencyNumberAdapter(new EmergencyNumbersGenerator(getContext()).generateEmergencyNumber(),getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         emergencyNumberRecyclerView.setLayoutManager(mLayoutManager);
         emergencyNumberRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -48,12 +50,6 @@ public class EmergencyFragment extends Fragment {
         return v;
     }
 
-    private ArrayList<EmergencyNumberFeatures> addFeatures() {
-        features = new ArrayList<>();
-        EmergencyNumberFeatures em = new EmergencyNumberFeatures(
 
-        );
-        return features;
-    }
 
 }
