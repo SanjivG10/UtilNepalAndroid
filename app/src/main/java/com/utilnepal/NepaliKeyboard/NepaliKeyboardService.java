@@ -4,7 +4,9 @@ import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.AudioManager;
+import android.text.Layout;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
 
@@ -77,6 +79,21 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
                 kv.setKeyboard(keyboard);
                 kv.setOnKeyboardActionListener(this);
                 break;
+
+            case -2000:
+                keyboard = new Keyboard(this,R.xml.nepali_symbol);
+                kv.setKeyboard(keyboard);
+                kv.setOnKeyboardActionListener(this);
+                break;
+            case -3000:
+                ic.commitText("क्ष",1);
+                break;
+            case -3001:
+                ic.commitText("त्र",1);
+                break;
+            case -3002:
+                ic.commitText("ज्ञ",1);
+                break;
             default:
                 char code = (char)primaryCode;
                 if(Character.isLetter(code) && isCaps)
@@ -128,4 +145,5 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
     public void swipeUp() {
 
     }
+
 }
