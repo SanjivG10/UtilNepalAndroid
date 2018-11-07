@@ -2,6 +2,8 @@ package com.utilnepal;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -9,13 +11,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.utilnepal.AudioRecorder.ActivitiesFragment.AudioRecorderActivity;
 import com.utilnepal.MobileHelp.ActivitiesFragment.MobileActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private CardView torchCardView;
     private CardView keyboardCardView;
-    private CardView trendingCardView;
+    private CardView audioRecordCardView;
     private CardView mobileHelpCardView;
     private CardView newsCardView;
     private CardView recommenededCardView;
@@ -39,9 +42,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialize() {
+        // get camera permission!
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, 50);
+        }
+
         torchCardView = findViewById(R.id.torchCardView);
         keyboardCardView = findViewById(R.id.keyboardCardView);
-        trendingCardView = findViewById(R.id.trendingCardView);
+        audioRecordCardView = findViewById(R.id.audioRecordCardView);
         mobileHelpCardView = findViewById(R.id.mobileHelpCardView);
         newsCardView = findViewById(R.id.newsCardView);
         recommenededCardView = findViewById(R.id.recommendedCardView);
@@ -61,11 +69,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        audioRecordCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,AudioRecorderActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void torch_func() {
-
-
 
         if (hasFlash) {
             if (is_flash_on)
@@ -88,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
-            Toast.makeText(this," Unknown Error Occured",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this," Unknown Error Occured here " + e.getMessage(),Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -107,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         }
         catch (Exception e)
         {
-            Toast.makeText(this,"Unknown Error Occured",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Unknown Error Occured "+e.getMessage(),Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -171,7 +171,7 @@
                 card_view:cardElevation="4dp"
                 card_view:cardCornerRadius="20dp"
                 card_view:contentPadding="10dp"
-                android:id="@+id/trendingCardView"
+                android:id="@+id/audioRecordCardView"
 
                 >
 
@@ -185,14 +185,14 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_trending_up_black_24dp"
+                        android:src="@drawable/ic_audiotrack_black_24dp"
                         android:layout_gravity="center_horizontal"
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Trending"
+                        android:text="Audio Recorder"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_horizontal"
                         />

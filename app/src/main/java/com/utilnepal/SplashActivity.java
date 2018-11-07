@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_DISPLAY_LENGTH = 3000;
+    private static final int SPLASH_DISPLAY_LENGTH = 2000;
 
 
     @Override
