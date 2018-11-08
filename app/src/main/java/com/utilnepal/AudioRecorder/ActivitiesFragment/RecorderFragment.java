@@ -122,7 +122,7 @@ public class RecorderFragment extends Fragment {
 
 
     private String getDateTime() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         Date date = new Date();
         return dateFormat.format(date);
     }
@@ -144,7 +144,6 @@ public class RecorderFragment extends Fragment {
         File f = new File(mFileName);
 
         String current_time = getDateTime();
-        current_time.replaceAll(" ", "\\ ");
 
         if(!f.exists())
         {

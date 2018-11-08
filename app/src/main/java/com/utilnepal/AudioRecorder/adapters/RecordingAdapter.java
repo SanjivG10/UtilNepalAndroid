@@ -1,8 +1,14 @@
 package com.utilnepal.AudioRecorder.adapters;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
 import android.util.Log;
@@ -17,8 +23,10 @@ import com.utilnepal.AudioRecorder.Files.FileNames;
 import com.utilnepal.MobileHelp.adapters.EmergencyNumberAdapter;
 import com.utilnepal.R;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.RecordingViewHolder> {
@@ -26,8 +34,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
     private ArrayList<FileNames> fileNames;
     private Context c;
     private MediaPlayer mPlayer;
-    private ImageView playButton;
-    private ImageView pauseButton;
+
 
     public RecordingAdapter(ArrayList<FileNames> fileNames, Context c, MediaPlayer mplayer)
     {
@@ -46,24 +53,45 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecordingAdapter.RecordingViewHolder recordingViewHolder, int position) {
+    public void onBindViewHolder(@NonNull final RecordingAdapter.RecordingViewHolder recordingViewHolder, final int position) {
                 final String source = fileNames.get(position).getFilename();
                 recordingViewHolder.recordingName.setText( fileNames.get(position).getFilename());
-                playButton.setOnClickListener(new View.OnClickListener() {
+                recordingViewHolder.playButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        playFile(source);
+                        String main_path = c.getFilesDir().getPath();
+                        String appended_path = main_path+"/recordings";
+                        String newSource =  appended_path+"/"+source;
+                        Log.e("Source File", newSource + "position =>");
+                        playFile(newSource,recordingViewHolder);
                     }
                 });
 
-                pauseButton.setOnClickListener(new View.OnClickListener() {
+                recordingViewHolder.pauseButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        pauseFile();
+                        pauseFile(recordingViewHolder);
                     }
                 });
 
     }
+
+    private void togglePlay(RecordingViewHolder recordingViewHolder) {
+        if (recordingViewHolder.playButton.getVisibility()== View.VISIBLE)
+        {
+            recordingViewHolder.playButton.setVisibility(View.GONE);
+            recordingViewHolder.pauseButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void togglePause(RecordingViewHolder recordingViewHolder) {
+        if (recordingViewHolder.pauseButton.getVisibility()== View.VISIBLE)
+        {
+            recordingViewHolder.playButton.setVisibility(View.VISIBLE);
+            recordingViewHolder.pauseButton.setVisibility(View.GONE);
+        }
+    }
+
 
     @Override
     public int getItemCount() {
@@ -73,50 +101,84 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
     public class RecordingViewHolder extends RecyclerView.ViewHolder {
 
         private TextView recordingName;
-
+        private ImageView playButton;
+        private ImageView pauseButton;
 
         public RecordingViewHolder(@NonNull View itemView) {
             super(itemView);
             recordingName = itemView.findViewById(R.id.eachFileName);
             playButton = itemView.findViewById(R.id.playButton);
             pauseButton = itemView.findViewById(R.id.pauseButton);
+
+
+
         }
     }
 
-        private void playFile(String source) {
+        private void playFile(String source, final RecordingViewHolder recordingViewHolder) {
+//            getPermission();
             mPlayer = new MediaPlayer();
             try {
                 mPlayer.setDataSource(source);
                 mPlayer.prepare();
                 mPlayer.start();
-                changePauseIcon();
+                if (mPlayer.isPlaying())
+                {
+                    togglePlay(recordingViewHolder);
+                }
+
+                mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        togglePause(recordingViewHolder);
+                    }
+                });
+
             } catch (IOException e) {
                 Log.e("Error Occured", "prepare() failed " +e.getMessage());
-                Toast.makeText(c,"Cannot Play File, Error",Toast.LENGTH_LONG).show();
-                changePlayIcon();
+                Toast.makeText(c,"Cannot Play File",Toast.LENGTH_LONG).show();
+                togglePause(recordingViewHolder);
             }
         }
 
-        private void pauseFile() {
+    private void getPermission() {
+        if (ContextCompat.checkSelfPermission(c,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions((Activity) c,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    1000);
+
+        }
+    }
+
+
+    private void pauseFile(RecordingViewHolder recordingViewHolder) {
             if (mPlayer != null) {
                 mPlayer.release();
                 mPlayer = null;
-                changePlayIcon();
+                togglePause(recordingViewHolder);
             }
         }
 
-        private void changePauseIcon() {
-            if (playButton.getVisibility() == View.VISIBLE) {
-                playButton.setVisibility(View.GONE);
-                pauseButton.setVisibility(View.VISIBLE);
-            }
-        }
+//    private void togglePause()
+//    {
+//        if (playButton_dup.getVisibility()==View.VISIBLE)
+//        {
+//            playButton_dup.setVisibility(View.GONE);
+//            pauseButton_dup.setVisibility(View.VISIBLE);
+//        }
+//    }
+//
+//    private void togglePlay()
+//    {
+//        if (pauseButton_dup.getVisibility()==View.VISIBLE)
+//        {
+//            playButton_dup.setVisibility(View.VISIBLE);
+//            pauseButton_dup.setVisibility(View.GONE);
+//        }
+//    }
 
-        private void changePlayIcon() {
-            if (pauseButton.getVisibility() == View.VISIBLE) {
-                playButton.setVisibility(View.VISIBLE);
-                pauseButton.setVisibility(View.GONE);
-            }
-        }
 
 }
