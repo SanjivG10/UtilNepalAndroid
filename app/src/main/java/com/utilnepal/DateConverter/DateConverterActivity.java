@@ -53,6 +53,10 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
     private String [] nepDays = new String[32];
 
 
+    int yearSelectedOnClick = 0;
+    int noOfDaysOnClick = 30;
+    int monthPositionOnClick = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +120,7 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
         monthNepSpinner.setAdapter(monthAdapter);
         dayNepSpinner.setAdapter(dayAdapter);
 
+
         yearNepSpinner.setOnItemSelectedListener(this);
         monthNepSpinner.setOnItemSelectedListener(this);
         dayNepSpinner.setOnItemSelectedListener(this);
@@ -128,14 +133,13 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
                     String date = convertToEnglish(daysCount);
                     dateConvertedTextView.setText(date);
                 }
+
                 else
                 {
                     Toast.makeText(getApplicationContext(), "Some Error Occured. Please choose date again",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-
 
     }
 
@@ -246,26 +250,26 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
         nepDays[9]=  "१०";
         nepDays[10]= "११";
         nepDays[11]= "१२";
-        nepDays[12]=  "१३";
-        nepDays[13]="१४";
-        nepDays[14]="१५";
-        nepDays[15]="१६";
-        nepDays[16]="१७";
-        nepDays[17]="१८";
-        nepDays[18]="१९";
-        nepDays[19]="२०";
-        nepDays[20]="२१";
-        nepDays[21]="२२";
-        nepDays[22]="२३";
-        nepDays[23]="२४";
-        nepDays[24]="२५";
-        nepDays[25]="२६";
-        nepDays[26]="२७";
-        nepDays[27]="२८";
-        nepDays[28]="२९";
-        nepDays[29]="३०";
-        nepDays[30]="३१";
-        nepDays[31]="३२";
+        nepDays[12]= "१३";
+        nepDays[13]= "१४";
+        nepDays[14]= "१५";
+        nepDays[15]= "१६";
+        nepDays[16]= "१७";
+        nepDays[17]= "१८";
+        nepDays[18]= "१९";
+        nepDays[19]= "२०";
+        nepDays[20]= "२१";
+        nepDays[21]= "२२";
+        nepDays[22]= "२३";
+        nepDays[23]= "२४";
+        nepDays[24]= "२५";
+        nepDays[25]= "२६";
+        nepDays[26]= "२७";
+        nepDays[27]= "२८";
+        nepDays[28]= "२९";
+        nepDays[29]= "३०";
+        nepDays[30]= "३१";
+        nepDays[31]= "३२";
 
         return nepDays;
     }
@@ -290,6 +294,37 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        if(monthNepSpinner.getSelectedItem()!=null) {
+            monthPositionOnClick = Arrays.asList(nepMonths).indexOf(monthNepSpinner.getSelectedItem().toString()) + 1;
+        }
+
+
+        switch (parent.getId())
+        {
+            case R.id.yearNepSpinner:
+                String yearSelectedOnClickString =  yearNepSpinner.getSelectedItem().toString();
+                yearSelectedOnClick = Integer.parseInt(yearSelectedOnClickString);
+                break;
+
+            case R.id.monthNepSpinner:
+                noOfDaysOnClick= EachMonthNumberOfDates.getNepaliMap().get(yearSelectedOnClick)[monthPositionOnClick];
+                Toast.makeText(getApplicationContext(), noOfDaysOnClick + " monthSpinner <= No of Days",Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.dayNepSpinner:
+                if (yearSelectedOnClick ==0)
+                {
+                    yearSelectedOnClick = 2000;
+                }
+                break;
+            default:
+                noOfDaysOnClick = 28;
+                Toast.makeText(getApplicationContext(), noOfDaysOnClick + " <= No of Days",Toast.LENGTH_SHORT).show();
+
+        }
+
+
 
     }
 
