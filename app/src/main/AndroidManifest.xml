@@ -2,17 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.utilnepal">
 
-
-    <!--permissions-->
+    <!-- permissions -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <uses-feature android:name="android.hardware.camera" />
-
-
 
     <application
         android:allowBackup="true"
@@ -29,23 +26,23 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-
         <activity android:name=".MobileHelp.ActivitiesFragment.MobileActivity" />
-        <activity android:name=".AudioRecorder.ActivitiesFragment.AudioRecorderActivity"></activity>
-
+        <activity android:name=".AudioRecorder.ActivitiesFragment.AudioRecorderActivity" />
         //keyboard Service
         <service
             android:name=".NepaliKeyboard.NepaliKeyboardService"
             android:label="Nepali Keyboard"
-            android:permission="android.permission.BIND_INPUT_METHOD"
-            >
-            <meta-data android:name="android.view.im" android:resource="@xml/method"/>
-            <intent-filter>
-                <action android:name="android.view.InputMethod"/>
-            </intent-filter>
+            android:permission="android.permission.BIND_INPUT_METHOD">
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/method" />
 
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
         </service>
 
+        <activity android:name=".DateConverter.DateConverterActivity"></activity>
     </application>
 
 </manifest>

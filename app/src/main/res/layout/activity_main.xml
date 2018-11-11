@@ -225,7 +225,7 @@
                 card_view:cardElevation="4dp"
                 card_view:cardCornerRadius="20dp"
                 card_view:contentPadding="10dp"
-                android:id="@+id/newsCardView"
+                android:id="@+id/dateconverterCardView"
                 >
 
                 <LinearLayout
@@ -238,14 +238,14 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_whatshot_black_24dp"
+                        android:src="@drawable/ic_date_range_black_24dp"
                         android:layout_gravity="center_horizontal"
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Latest News"
+                        android:text="Date Converter"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_horizontal"
                         />

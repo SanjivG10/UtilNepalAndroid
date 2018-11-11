@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DateConverter.DateConverterActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/nepToEngConverterLayout"
+            >
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/yearNepSpinner"
+                    android:textAlignment="center"
+                    ></Spinner>
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/monthNepSpinner"
+                    android:textAlignment="center"
+                    >
+                </Spinner>
+
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dayNepSpinner"
+                    android:textAlignment="center"
+
+                    >
+                </Spinner>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Convert to English"
+            android:id="@+id/buttonConvertToEnglish"
+            android:layout_below="@+id/nepToEngConverterLayout"
+            android:layout_marginTop="20dp"
+            android:textColor="#FFF"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_eng_nep"
+            android:padding="10dp"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/engToNepConverter"
+            android:layout_below="@+id/buttonConvertToEnglish"
+            >
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/yearEngSpinner"
+                    android:textAlignment="center"
+                    ></Spinner>
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/monthEngSpinner"
+                    android:textAlignment="center"
+                    >
+                </Spinner>
+
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dayEngSpinner"
+                    android:textAlignment="center"
+
+                    >
+                </Spinner>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Convert to Nepali"
+            android:id="@+id/buttonConvertToNepali"
+            android:layout_below="@+id/engToNepConverter"
+            android:layout_marginTop="20dp"
+            android:textColor="#FFF"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_eng_nep"
+            android:padding="10dp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:fontFamily="serif-monospace"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/dateConvertedTextView"
+            android:layout_marginBottom="30dp"
+            tools:text="YOUR DATE HERE"
+            android:textColor="#000"
+
+            />
+
+</RelativeLayout>

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.utilnepal.AudioRecorder.ActivitiesFragment.AudioRecorderActivity;
+import com.utilnepal.DateConverter.DateConverterActivity;
 import com.utilnepal.MobileHelp.ActivitiesFragment.MobileActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private CardView keyboardCardView;
     private CardView audioRecordCardView;
     private CardView mobileHelpCardView;
-    private CardView newsCardView;
+    private CardView dateconverterCardView;
     private CardView recommenededCardView;
     private ImageView torchImageView;
 
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         keyboardCardView = findViewById(R.id.keyboardCardView);
         audioRecordCardView = findViewById(R.id.audioRecordCardView);
         mobileHelpCardView = findViewById(R.id.mobileHelpCardView);
-        newsCardView = findViewById(R.id.newsCardView);
+        dateconverterCardView = findViewById(R.id.dateconverterCardView);
         recommenededCardView = findViewById(R.id.recommendedCardView);
         torchImageView = findViewById(R.id.torchImageView);
 
@@ -77,6 +78,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        dateconverterCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,DateConverterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void torch_func() {
