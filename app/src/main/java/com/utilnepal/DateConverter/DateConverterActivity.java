@@ -50,6 +50,14 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
     int startingNepDay = 1;
     int dayOfWeek = Calendar.WEDNESDAY;
 
+    //EQUIVALENT ENG DATE
+    int startingEngYear = 1943;
+    int startingEngMonth = 4;
+    int startingEngDay = 14;
+
+
+
+    //starting eng date
     int startingEngYearForSelection = 1944;
     int startingEngMonthForSelection = 1;
     int startingEngDayForSelection = 1;
@@ -58,12 +66,6 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
     int startingNepYearForSelection = 2000;
     int startingNepMonthForSelection = 9;
     int startingNepDayForSelection = 17;
-
-
-    //ENG DATE
-    int startingEngYear = 1943;
-    int startingEngMonth = 4;
-    int startingEngDay = 14;
 
 
     private String [] nepMonths = new String[12];
@@ -160,9 +162,9 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
          dayNepSpinner.setAdapter(dayAdapter);
 
 
-        yearNepSpinner.setOnItemSelectedListener(this);
-        monthNepSpinner.setOnItemSelectedListener(this);
-        dayNepSpinner.setOnItemSelectedListener(this);
+         yearNepSpinner.setOnItemSelectedListener(this);
+         monthNepSpinner.setOnItemSelectedListener(this);
+         dayNepSpinner.setOnItemSelectedListener(this);
 
         convertToEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,10 +185,11 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
         convertToNepali.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Calendar currentEngDate = new GregorianCalendar();
                 int engYear = startingEngYearForSelection;
                 int engMonth = startingEngMonthForSelection;
-                int engDay = startingEngMonthForSelection;
+                int engDay = startingEngDayForSelection;
 
                 if(yearEngSpinner.getSelectedItem()!=null)
                 {
@@ -200,12 +203,13 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
                         date = new SimpleDateFormat("MMMM").parse(monthEngSpinner.getSelectedItem().toString());
                         Calendar cal = Calendar.getInstance();
                         cal.setTime(date);
-                        engMonth = Integer.parseInt(String.valueOf(cal.get(Calendar.MONTH)));
+                        engMonth = Integer.parseInt(String.valueOf(cal.get(Calendar.MONTH)+1));
+                        Log.e("I am in parse exception", "HAHA "+ engMonth);
                     } catch (ParseException e) {
                         e.printStackTrace();
                         engMonth = 1;
+                        Log.e("I am in parse exception", e.getMessage()+"HAHA");
                     }
-
 
                 }
 
