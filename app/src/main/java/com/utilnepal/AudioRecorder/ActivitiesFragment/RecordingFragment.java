@@ -59,7 +59,14 @@ public class RecordingFragment extends Fragment {
         String appended_path = main_path+"/recordings";
 
         File directory = new File(appended_path);
+
+        if(directory.length()==0)
+        {
+            return fileNames;
+        }
+
         File [] files = directory.listFiles();
+
 
         for (int i=0; i<files.length; i++)
         {

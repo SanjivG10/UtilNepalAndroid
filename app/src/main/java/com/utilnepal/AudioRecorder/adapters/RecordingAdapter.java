@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.RecordingViewHolder> {
 
-    private ArrayList<FileNames> fileNames;
+    private ArrayList<FileNames> fileNames ;
     private Context c;
     private MediaPlayer mPlayer;
 
@@ -95,6 +95,10 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
 
     @Override
     public int getItemCount() {
+        if(fileNames.isEmpty())
+        {
+            return 0;
+        }
         return fileNames.size();
     }
 
