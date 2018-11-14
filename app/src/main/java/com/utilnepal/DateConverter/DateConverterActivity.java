@@ -17,6 +17,7 @@ import com.utilnepal.R;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -24,8 +25,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class DateConverterActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener {
 
@@ -70,6 +75,7 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
     private String [] nepMonths = new String[12];
     private String [] nepDays = new String[32];
+    private Map<String, String> shortMonthToLongMonthMatcher;
 
 
     int yearSelectedOnClick = 0;
@@ -141,7 +147,12 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
          yearEngToNepAdapter = new ArrayAdapter<String>(this,R.layout.each_spinner_item, getYearsForEnglish());
          monthEngToNepAdapter = new ArrayAdapter<String>(this,R.layout.each_spinner_item, getMonthForEnglish());
-         dayEngToNepAdapter = new ArrayAdapter<String>(this,R.layout.each_spinner_item, getDaysForEnglish());
+
+         Calendar mycal = new GregorianCalendar(startingEngYearForSelection,startingEngMonthForSelection, 1);
+         int daysInMonth = mycal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+
+         dayEngToNepAdapter = new ArrayAdapter<String>(this,R.layout.each_spinner_item, getDaysForEnglish(daysInMonth));
 
          yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
          monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -166,19 +177,18 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
          monthNepSpinner.setOnItemSelectedListener(this);
          dayNepSpinner.setOnItemSelectedListener(this);
 
+        yearEngSpinner.setOnItemSelectedListener(this);
+        monthEngSpinner.setOnItemSelectedListener(this);
+        dayEngSpinner.setOnItemSelectedListener(this);
+
+
         convertToEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 long daysCount = getTotalDaysCount();
-                if (daysCount != 0) {
-                    String date = convertToEnglish(daysCount);
-                    dateConvertedTextView.setText(date);
-                }
+                String date = convertToEnglish(daysCount);
+                dateConvertedTextView.setText(date);
 
-                else
-                {
-                    Toast.makeText(getApplicationContext(), "Some Error Occured. Please choose date again",Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
@@ -199,16 +209,18 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
                 if(monthEngSpinner.getSelectedItem()!=null)
                 {
                     Date date = null;
+                    Log.e("monthSpinner","I am in month spinner");
                     try {
                         date = new SimpleDateFormat("MMMM").parse(monthEngSpinner.getSelectedItem().toString());
                         Calendar cal = Calendar.getInstance();
                         cal.setTime(date);
-                        engMonth = Integer.parseInt(String.valueOf(cal.get(Calendar.MONTH)+1));
-                        Log.e("I am in parse exception", "HAHA "+ engMonth);
+
+                        engMonth = Integer.parseInt(String.valueOf(cal.get(Calendar.MONTH)));
+
                     } catch (ParseException e) {
                         e.printStackTrace();
                         engMonth = 1;
-                        Log.e("I am in parse exception", e.getMessage()+"HAHA");
+                        Log.e("Error Some Error", e.getMessage());
                     }
 
                 }
@@ -222,7 +234,7 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
                 Calendar baseEngDate = new GregorianCalendar();
 
-                baseEngDate.set(startingEngYearForSelection, startingEngMonthForSelection, startingEngDayForSelection);
+                baseEngDate.set(startingEngYearForSelection, startingEngMonthForSelection-1, startingEngDayForSelection);
 
                 long totalEngDaysCount = daysBetween(baseEngDate, currentEngDate);
 
@@ -232,59 +244,89 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
             }
 
-            private String convertToNepaliFunction(long totalEngDaysCount) {
-                int nepYear = startingNepYearForSelection;
-                int nepMonth = startingNepMonthForSelection;
-                int nepDay = startingNepDayForSelection;
-
-                while (totalEngDaysCount != 0) {
-
-                    // getting the total number of days in month nepMonth in year nepYear
-                    int daysInIthMonth = EachMonthNumberOfDates.getNepaliMap().get(nepYear)[nepMonth];
-
-                    nepDay++; // incrementing nepali day
-
-                    if (nepDay > daysInIthMonth) {
-                        nepMonth++;
-                        nepDay = 1;
-                    }
-                    if (nepMonth > 12) {
-                        nepYear++;
-                        nepMonth = 1;
-                    }
-
-                    dayOfWeek++; // count the days in terms of 7 days
-                    if (dayOfWeek > 7) {
-                        dayOfWeek = 1;
-                    }
-                    totalEngDaysCount--;
-                }
-
-                return String.valueOf(nepYear) +" "+String.valueOf(nepMonth)+" "+ String.valueOf(nepDay) ;
-
-
-            }
-
-            private long daysBetween(Calendar startDate, Calendar endDate) {
-                Calendar date = (Calendar) startDate.clone();
-                long daysBetween = 0;
-                while (date.before(endDate)) {
-                    date.add(Calendar.DAY_OF_MONTH, 1);
-                    daysBetween++;
-                }
-                return daysBetween;
-            }
         });
 
     }
 
+    private String convertToNepaliFunction(long totalEngDaysCount) {
+        int nepYear = startingNepYearForSelection;
+        int nepMonth = startingNepMonthForSelection;
+        int nepDay = startingNepDayForSelection;
+
+        while (totalEngDaysCount != 0) {
+
+            // getting the total number of days in month nepMonth in year nepYear
+            int daysInIthMonth = EachMonthNumberOfDates.getNepaliMap().get(nepYear)[nepMonth];
+
+            nepDay++; // incrementing nepali day
+
+            if (nepDay > daysInIthMonth) {
+                nepMonth++;
+                nepDay = 1;
+            }
+            if (nepMonth > 12) {
+                nepYear++;
+                nepMonth = 1;
+            }
+
+            dayOfWeek++; // count the days in terms of 7 days
+            if (dayOfWeek > 7) {
+                dayOfWeek = 1;
+            }
+            totalEngDaysCount--;
+        }
+
+        return String.valueOf(nepYear) +" "+String.valueOf(nepMonth)+" "+ String.valueOf(nepDay) ;
+
+    }
+
+    private long daysBetween(Calendar startDate, Calendar endDate) {
+
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
+        String inputString1 = null;
+        String inputString2 = null;
+
+        Date date1 = startDate.getTime();
+        Date date2 = endDate.getTime();
+
+        inputString1 = myFormat.format(date1);
+        inputString2 = myFormat.format(date2);
+        Log.e("String", inputString1 + inputString2);
+
+        long diff = 0;
+        try {
+            Date date11 = myFormat.parse(inputString1);
+            Date date22 = myFormat.parse(inputString2);
+            diff = date22.getTime() - date11.getTime();
+            diff = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        //
+        Calendar date = (Calendar) startDate.clone();
+        long daysBetweens = 0;
+        while (date.before(endDate)) {
+            date.add(startDate.DAY_OF_MONTH, 1);
+            daysBetweens++;
+        }
+
+        Log.e("Comparing two values", "FROM NEWONE => "+ diff + " OLD VALUE => " + daysBetweens );
+
+        return daysBetweens;
+    }
+
     private String [] getMonthForEnglish() {
+        shortMonthToLongMonthMatcher = new HashMap<>();
         String[] months = new DateFormatSymbols().getMonths();
+
         String [] shortMonth = new String[months.length];
         int index = 0;
         for (String month : months)
         {
             shortMonth[index] = month.substring(0,3);
+            shortMonthToLongMonthMatcher.put(month.substring(0,3),month);
             index++;
         }
 
@@ -303,7 +345,7 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
         return years;
     }
 
-    private String [] getDaysForEnglish()
+    private String [] getDaysForEnglish(int noOfdays)
     {
         int length = 0;
         String [] days = new String[90];
@@ -313,7 +355,7 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
             length++;
         }
 
-        return days;
+        return Arrays.copyOfRange(days,0,noOfdays);
     }
 
     private String convertToEnglish(long dayscount) {
@@ -360,6 +402,10 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
         }
     }
 
+
+
+
+
     private long getTotalDaysCount() {
         long totalNepDaysCount = 0;
         String newDate=null;
@@ -384,12 +430,11 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
             int selectedDay=  Arrays.asList(nepDays).indexOf(dayNepSpinner.getSelectedItem().toString())+1;
             totalNepDaysCount += selectedDay - startingNepDay;
 
-            Log.e("Selected Day", String.valueOf(selectedDay)+ "THIS IS SELECTED DAY");
         }
 
         else
         {
-            Toast.makeText(this, "Some Error Occured. Please Check Your Date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Some Error for this date, please choose another!", Toast.LENGTH_SHORT).show();
         }
 
         return totalNepDaysCount;
@@ -490,17 +535,68 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
                 dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 dayNepSpinner.setAdapter(dayAdapter);
 
-                Toast.makeText(getApplicationContext(), noOfDaysOnClick + " monthSpinner <= No of Days",Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.yearEngSpinner:
+                int yearSelectedOnClickStringForEnglishInteger = 1944;
+                int monthSelectedOnClickStringEnglishInteger = 1;
+                if(yearEngSpinner.getSelectedItem()!=null) {
+                    String yearSelectedOnClickStringEnglish = yearEngSpinner.getSelectedItem().toString();
+                    yearSelectedOnClickStringForEnglishInteger = Integer.parseInt(yearSelectedOnClickStringEnglish);
+                }
+
+                if(monthEngSpinner.getSelectedItem()!=null)
+                {
+                    Date date = null;//put your month name here
+                    try {
+                        date = new SimpleDateFormat("MMM").parse( shortMonthToLongMonthMatcher.get(monthEngSpinner.getSelectedItem().toString()));
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(date);
+                        monthSelectedOnClickStringEnglishInteger=cal.get(Calendar.MONTH);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                Calendar mycal = new GregorianCalendar(yearSelectedOnClickStringForEnglishInteger, monthSelectedOnClickStringEnglishInteger, 1);
+                int daysInMonth = mycal.getActualMaximum(Calendar.DAY_OF_MONTH); // 28
+
+                dayEngToNepAdapter = new ArrayAdapter<String>(this,R.layout.each_spinner_item, getDaysForEnglish(daysInMonth));
+                dayEngToNepAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                dayEngSpinner.setAdapter(dayEngToNepAdapter);
 
                 break;
 
-            case R.id.dayNepSpinner:
-                if (yearSelectedOnClick ==0)
-                {
-                    yearSelectedOnClick = 2000;
+            case R.id.monthEngSpinner:
+                int yearSelectedOnClickStringForEnglish = 1944;
+                int monthSelectedOnClickStringEnglish = 1;
+                if(yearEngSpinner.getSelectedItem()!=null) {
+                    String yearSelectedOnClickStringEnglish = yearEngSpinner.getSelectedItem().toString();
+                    yearSelectedOnClickStringForEnglish = Integer.parseInt(yearSelectedOnClickStringEnglish);
                 }
-                noOfDaysOnClick= EachMonthNumberOfDates.getNepaliMap().get(yearSelectedOnClick)[monthPositionOnClick];
 
+                if(monthEngSpinner.getSelectedItem()!=null)
+                {
+                    Date date = null;
+                    try {
+                        date = new SimpleDateFormat("MMM").parse( shortMonthToLongMonthMatcher.get(monthEngSpinner.getSelectedItem().toString()));
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(date);
+                        monthSelectedOnClickStringEnglish=cal.get(Calendar.MONTH);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                Calendar cal = new GregorianCalendar(yearSelectedOnClickStringForEnglish, monthSelectedOnClickStringEnglish, 1);
+                int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                dayEngToNepAdapter = new ArrayAdapter<String>(this,R.layout.each_spinner_item, getDaysForEnglish(days));
+                dayEngToNepAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                dayEngSpinner.setAdapter(dayEngToNepAdapter);
+                break;
         }
 
 
