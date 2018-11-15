@@ -106,6 +106,11 @@
     <string name="bloodBankNumber">4225344</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="selectNepaliKeyboard">नेपाली किबोर्ड सेलेक्ट गर्नुहोस् </string>
+    <string name="enableNepaliKeyboard"> नेपाली किबोर्ड इनेबल गर्नुहोस् </string>
+    <string name="checkNepaliByTyping"> केही टाईप गरेर हेर्नुहोस्   </string>
+
+
+
 
 </resources>

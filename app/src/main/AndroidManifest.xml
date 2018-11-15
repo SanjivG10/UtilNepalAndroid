@@ -42,7 +42,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".DateConverter.DateConverterActivity"></activity>
+        <activity android:name=".DateConverter.DateConverterActivity" />
+        <activity android:name=".NepaliKeyboard.KeyboardActivity"></activity>
     </application>
 
 </manifest>

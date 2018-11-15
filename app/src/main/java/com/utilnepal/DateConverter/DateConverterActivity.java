@@ -209,13 +209,13 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
                 if(monthEngSpinner.getSelectedItem()!=null)
                 {
                     Date date = null;
-                    Log.e("monthSpinner","I am in month spinner");
                     try {
                         date = new SimpleDateFormat("MMMM").parse(monthEngSpinner.getSelectedItem().toString());
                         Calendar cal = Calendar.getInstance();
                         cal.setTime(date);
 
                         engMonth = Integer.parseInt(String.valueOf(cal.get(Calendar.MONTH)));
+                        Log.e("Month Value",engMonth + " < This is the eng month Selected");
 
                     } catch (ParseException e) {
                         e.printStackTrace();
