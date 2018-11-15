@@ -1,7 +1,12 @@
 package com.utilnepal.MobileHelp.ActivitiesFragment;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,12 +37,20 @@ public class MobileActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getPermission();
+
         mViewPager = findViewById(R.id.viewPagerHomePage);
         mobileHelpViewPagerAdapter = new MobileHelpViewPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mobileHelpViewPagerAdapter);
 
         tabLayoutHomePage = findViewById(R.id.tabLayoutHomePage);
         tabLayoutHomePage.setupWithViewPager(mViewPager);
+    }
+
+    private void getPermission() {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MobileActivity.this, new String[]{Manifest.permission.CALL_PHONE},1000);
+        }
     }
 
 
