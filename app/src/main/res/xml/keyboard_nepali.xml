@@ -25,7 +25,7 @@
         <Key android:codes="0x0917" android:keyLabel="ग"/>
         <Key android:codes="0x091B" android:keyLabel="छ"/>
         <Key android:codes="0x0916" android:keyLabel="ख" />
-        <Key android:codes="ox094B" android:keyLabel="ो"/>
+        <Key android:codes="0x094B" android:keyLabel="ो"/>
         <Key android:codes="0x093E" android:keyLabel="ा" android:keyEdgeFlags="right"/>
     </Row>
     <Row>

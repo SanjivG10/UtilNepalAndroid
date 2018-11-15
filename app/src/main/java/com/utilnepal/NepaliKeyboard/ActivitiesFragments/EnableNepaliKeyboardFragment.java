@@ -1,4 +1,4 @@
-package com.utilnepal.NepaliKeyboard.fragments;
+package com.utilnepal.NepaliKeyboard.ActivitiesFragments;
 
 import android.os.Bundle;
 import android.provider.Settings;
@@ -20,10 +20,12 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class EnableNepaliKeyboardFragment extends Fragment {
 
-    private EditText editTextForTyping;
-    private TextView enableKeyboardText;
-    private Button clickButton;
+    public static EditText editTextForTyping;
+    public static TextView enableKeyboardText;
+    public static Button clickButton;
+    public static TextView successInfo;
 
+    private String keyboard;
     private static final String MY_KEYBOARD_ID = "com.utilnepal/.NepaliKeyboard.NepaliKeyboardService";
 
     @Nullable
@@ -31,6 +33,8 @@ public class EnableNepaliKeyboardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.from(getContext()).inflate(R.layout.enable_nepali_keyboard_fragment,container,false);
+
+
         return v;
     }
 
@@ -39,31 +43,44 @@ public class EnableNepaliKeyboardFragment extends Fragment {
         clickButton = view.findViewById(R.id.enableKeyboardButton);
         editTextForTyping = view.findViewById(R.id.editTextForTyping);
         enableKeyboardText = view.findViewById(R.id.enableKeyboardText);
+        successInfo = view.findViewById(R.id.successKeyboardText);
 
-        checkIfKeyboardIsSelected();
+        keyboard = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
+        checkIfKeyboardIsSelected(keyboard);
 
         clickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 InputMethodManager imeManager = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
                 imeManager.showInputMethodPicker();
-                checkIfKeyboardIsSelected();
             }
         });
 
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void checkIfKeyboardIsSelected() {
 
-        String keyboard = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
+
+
+    public static void checkIfKeyboardIsSelected(String keyboard) {
+
 
         if(keyboard.equals(MY_KEYBOARD_ID))
         {
-            Log.e("IN SECTIOn", "hh");
+            Log.e("IN SECTIOn", keyboard);
             enableKeyboardText.setVisibility(View.GONE);
             editTextForTyping.setVisibility(View.VISIBLE);
             clickButton.setVisibility(View.GONE);
+            successInfo.setVisibility(View.VISIBLE);
+        }
+
+        else
+        {
+            Log.e("In Wrong Section", keyboard);
+            enableKeyboardText.setVisibility(View.VISIBLE);
+            editTextForTyping.setVisibility(View.GONE);
+            clickButton.setVisibility(View.VISIBLE);
+            successInfo.setVisibility(View.GONE);
         }
 
     }

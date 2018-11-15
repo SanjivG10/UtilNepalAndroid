@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.utilnepal.AudioRecorder.ActivitiesFragment.AudioRecorderActivity;
 import com.utilnepal.DateConverter.DateConverterActivity;
 import com.utilnepal.MobileHelp.ActivitiesFragment.MobileActivity;
-import com.utilnepal.NepaliKeyboard.KeyboardActivity;
+import com.utilnepal.NepaliKeyboard.ActivitiesFragments.KeyboardActivity;
 
 public class MainActivity extends AppCompatActivity {
 

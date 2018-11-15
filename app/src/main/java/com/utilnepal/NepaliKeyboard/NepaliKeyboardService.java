@@ -1,5 +1,8 @@
 package com.utilnepal.NepaliKeyboard;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
@@ -12,7 +15,7 @@ import android.view.inputmethod.InputConnection;
 
 import com.utilnepal.R;
 
-public class NepaliKeyboardService extends InputMethodService implements KeyboardView.OnKeyboardActionListener  {
+public class NepaliKeyboardService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
     //initializing Keyboard
     private KeyboardView kv;
@@ -145,5 +148,6 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
     public void swipeUp() {
 
     }
+
 
 }

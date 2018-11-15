@@ -43,7 +43,7 @@
         </service>
 
         <activity android:name=".DateConverter.DateConverterActivity" />
-        <activity android:name=".NepaliKeyboard.KeyboardActivity"></activity>
+        <activity android:name=".NepaliKeyboard.ActivitiesFragments.KeyboardActivity"></activity>
     </application>
 
 </manifest>

@@ -1,14 +1,12 @@
-package com.utilnepal.NepaliKeyboard.fragments;
+package com.utilnepal.NepaliKeyboard.ActivitiesFragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +15,10 @@ import android.widget.Button;
 
 import com.utilnepal.R;
 
-import java.util.List;
-
 public class SelectNepaliKeyboardScreenFragment extends Fragment {
 
     private static String KEYBOARDID = "com.utilnepal/.NepaliKeyboard.NepaliKeyboardService";
+
 
 
     @Nullable
@@ -65,5 +62,7 @@ public class SelectNepaliKeyboardScreenFragment extends Fragment {
 
         return false;
     }
+
+
 
 }
