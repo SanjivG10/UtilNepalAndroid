@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     android:keyWidth="10%p"
-    android:horizontalGap="2px"
     android:verticalGap="2px"
     android:keyHeight="60dp">
 
@@ -39,7 +38,7 @@
         <Key android:codes="0x0922" android:keyLabel="ढ"/>
         <Key android:codes="0x093F" android:keyLabel="ि"/>
         <Key android:codes="0x0943" android:keyLabel="ृ"/>
-        <Key android:codes="0x0956" android:keyLabel="ॖ"/>
+        <Key android:codes="0x093C" android:keyLabel="़"/>
         <Key android:codes="0x0970" android:keyLabel="॰"/>
         <Key android:codes="0x0960" android:keyLabel="ॠ"/>
         <Key android:codes="0x0903" android:keyLabel="ः" android:keyEdgeFlags="right"/>
