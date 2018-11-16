@@ -3,10 +3,12 @@ package com.utilnepal.NepaliKeyboard.ActivitiesFragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,6 @@ import com.utilnepal.R;
 public class SelectNepaliKeyboardScreenFragment extends Fragment {
 
     private static String KEYBOARDID = "com.utilnepal/.NepaliKeyboard.NepaliKeyboardService";
-
 
 
     @Nullable
@@ -40,6 +41,19 @@ public class SelectNepaliKeyboardScreenFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Boolean x  = checkIfKeyboardIsSelected();
+                Log.e("FragmentManager", "IT IS TRUE" + String.valueOf(x));
+
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(getActivity(), KeyboardActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                }, 5000);
+
+
             }
         });
 
@@ -51,9 +65,11 @@ public class SelectNepaliKeyboardScreenFragment extends Fragment {
         enableIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getActivity().startActivity(enableIntent);
 
+
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         String list = imm.getEnabledInputMethodList().toString();
 
+        Log.e("List", list);
 
         if(list.contains(KEYBOARDID))
         {

@@ -69,7 +69,10 @@ public class KeyboardActivity extends AppCompatActivity {
         super.onResume();
         registerReceiver(mReceiver, mIntentFilter);
         String defaultIME = Settings.Secure.getString(getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
-        EnableNepaliKeyboardFragment.checkIfKeyboardIsSelected(defaultIME);
+        if(EnableNepaliKeyboardFragment.clickButton !=null && EnableNepaliKeyboardFragment.enableKeyboardText !=null && EnableNepaliKeyboardFragment.editTextForTyping!=null && EnableNepaliKeyboardFragment.successInfo!=null)
+        {
+            EnableNepaliKeyboardFragment.checkIfKeyboardIsSelected(defaultIME);
+        }
     }
     /* unregister the broadcast receiver */
     @Override

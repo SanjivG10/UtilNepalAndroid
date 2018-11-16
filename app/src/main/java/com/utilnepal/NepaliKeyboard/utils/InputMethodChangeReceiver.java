@@ -20,5 +20,7 @@ public class InputMethodChangeReceiver extends BroadcastReceiver {
             String defaultIME = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
             EnableNepaliKeyboardFragment.checkIfKeyboardIsSelected(defaultIME);
         }
+
+
     }
 }

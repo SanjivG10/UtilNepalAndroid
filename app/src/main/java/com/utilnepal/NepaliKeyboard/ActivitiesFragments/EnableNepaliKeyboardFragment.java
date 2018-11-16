@@ -32,14 +32,7 @@ public class EnableNepaliKeyboardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.from(getContext()).inflate(R.layout.enable_nepali_keyboard_fragment,container,false);
-
-
-        return v;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        View view = inflater.from(getContext()).inflate(R.layout.enable_nepali_keyboard_fragment,container,false);
         clickButton = view.findViewById(R.id.enableKeyboardButton);
         editTextForTyping = view.findViewById(R.id.editTextForTyping);
         enableKeyboardText = view.findViewById(R.id.enableKeyboardText);
@@ -56,11 +49,8 @@ public class EnableNepaliKeyboardFragment extends Fragment {
             }
         });
 
-        super.onViewCreated(view, savedInstanceState);
+        return view;
     }
-
-
-
 
     public static void checkIfKeyboardIsSelected(String keyboard) {
 

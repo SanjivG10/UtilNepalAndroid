@@ -28,7 +28,7 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
     @Override
     public View onCreateInputView() {
         kv = (KeyboardView)getLayoutInflater().inflate(R.layout.keyboard_preview,null);
-        keyboard = new Keyboard(this,R.xml.keyboard_layout);
+        keyboard = new Keyboard(this,R.xml.keyboard_nepali);
         kv.setKeyboard(keyboard);
         kv.setOnKeyboardActionListener(this);
         return kv;

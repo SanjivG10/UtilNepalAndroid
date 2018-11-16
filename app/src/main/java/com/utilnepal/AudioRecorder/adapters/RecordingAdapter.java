@@ -32,21 +32,21 @@ import java.util.ArrayList;
 public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.RecordingViewHolder> {
 
     private ArrayList<FileNames> fileNames ;
-    private Context c;
+    private Context context;
     private MediaPlayer mPlayer;
 
 
     public RecordingAdapter(ArrayList<FileNames> fileNames, Context c, MediaPlayer mplayer)
     {
         this.fileNames = fileNames;
-        this.c= c;
+        context= c;
         this.mPlayer = mplayer;
     }
 
     @NonNull
     @Override
     public RecordingViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v= LayoutInflater.from(c).inflate(R.layout.each_recording_view,viewGroup,false);
+        View v= LayoutInflater.from(context).inflate(R.layout.each_recording_view,viewGroup,false);
 
         RecordingViewHolder recordingViewHolder = new RecordingViewHolder(v);
         return recordingViewHolder;
@@ -59,7 +59,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
                 recordingViewHolder.playButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String main_path = c.getFilesDir().getPath();
+                        String main_path = context.getFilesDir().getPath();
                         String appended_path = main_path+"/recordings";
                         String newSource =  appended_path+"/"+source;
                         Log.e("Source File", newSource + "position =>");
@@ -140,17 +140,17 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
 
             } catch (IOException e) {
                 Log.e("Error Occured", "prepare() failed " +e.getMessage());
-                Toast.makeText(c,"Cannot Play File",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Cannot Play File",Toast.LENGTH_LONG).show();
                 togglePause(recordingViewHolder);
             }
         }
 
     private void getPermission() {
-        if (ContextCompat.checkSelfPermission(c,
+        if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions((Activity) c,
+            ActivityCompat.requestPermissions((Activity) context,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     1000);
 

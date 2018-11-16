@@ -177,9 +177,9 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
          monthNepSpinner.setOnItemSelectedListener(this);
          dayNepSpinner.setOnItemSelectedListener(this);
 
-        yearEngSpinner.setOnItemSelectedListener(this);
-        monthEngSpinner.setOnItemSelectedListener(this);
-        dayEngSpinner.setOnItemSelectedListener(this);
+         yearEngSpinner.setOnItemSelectedListener(this);
+         monthEngSpinner.setOnItemSelectedListener(this);
+         dayEngSpinner.setOnItemSelectedListener(this);
 
 
         convertToEnglish.setOnClickListener(new View.OnClickListener() {
@@ -282,37 +282,12 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
     private long daysBetween(Calendar startDate, Calendar endDate) {
 
-        SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
-        String inputString1 = null;
-        String inputString2 = null;
-
-        Date date1 = startDate.getTime();
-        Date date2 = endDate.getTime();
-
-        inputString1 = myFormat.format(date1);
-        inputString2 = myFormat.format(date2);
-        Log.e("String", inputString1 + inputString2);
-
-        long diff = 0;
-        try {
-            Date date11 = myFormat.parse(inputString1);
-            Date date22 = myFormat.parse(inputString2);
-            diff = date22.getTime() - date11.getTime();
-            diff = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        //
         Calendar date = (Calendar) startDate.clone();
         long daysBetweens = 0;
         while (date.before(endDate)) {
             date.add(startDate.DAY_OF_MONTH, 1);
             daysBetweens++;
         }
-
-        Log.e("Comparing two values", "FROM NEWONE => "+ diff + " OLD VALUE => " + daysBetweens );
 
         return daysBetweens;
     }
