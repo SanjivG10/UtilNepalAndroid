@@ -10,7 +10,6 @@ import com.utilnepal.NepaliKeyboard.ActivitiesFragments.EnableNepaliKeyboardFrag
 
 public class InputMethodChangeReceiver extends BroadcastReceiver {
 
-    private FragmentTransaction ft;
     private static final String MY_KEYBOARD_ID = "com.utilnepal/.NepaliKeyboard.NepaliKeyboardService";
 
     @Override

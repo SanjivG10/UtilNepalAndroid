@@ -29,6 +29,8 @@ public class MobileActivity extends AppCompatActivity {
     private List<Fragment> fragmentList;
     private MobileHelpViewPagerAdapter mobileHelpViewPagerAdapter;
     private Toolbar toolbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

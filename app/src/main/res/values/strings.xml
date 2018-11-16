@@ -3,6 +3,10 @@
     <string name="nepali_keyboard"> Nepali Keyboard</string>
     <string name="subtype_en_NP">Nepali (np)</string>
     <string name="balance"> पैसा चेक गर्नुहोस   </string>
+
+    <string name="add_balance"> ब्यालेन्स हाल्नुहोस   </string>
+    <string name="add_balance_info">सिममा ब्यालेन्स (पैसा) हाल्नुहोस</string>
+
     <string name="balance_info"> सिममा कती पैसा छ चेक गर्नु होस  </string>
     <string name="mobile_number"> मोबाईल नम्बर चेक </string>
     <string name="mobile_number_info"> आफ्नो मोबाईल नम्बर चेक गर्नुहोस   </string>
@@ -110,6 +114,16 @@
     <string name="enableNepaliKeyboard"> नेपाली किबोर्ड इनेबल गर्नुहोस् </string>
     <string name="checkNepaliByTyping"> केही टाईप गरेर हेर्नुहोस्   </string>
     <string name="successKeyboardText">बधाई छ! नेपाली किबोर्ड इनेबल भयो  </string>
+
+
+    <string name="rechargeViaCameraScannerInfo">
+रीचार्ज कार्ड मा भएको नम्बर कोर्नुहोस ।
+क्यामेराले त्यो कोरिहेको नम्बर मा देखाउनुहोस ।
+तल त्यो कोरिहेको नम्बर आउनेछ ।
+पछि, डन (DONE) थिच्नुहोस ।
+
+
+    </string>
 
 
 </resources>

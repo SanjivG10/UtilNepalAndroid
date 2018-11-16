@@ -45,7 +45,13 @@
 
         <activity android:name=".DateConverter.DateConverterActivity" />
         <activity android:name=".NepaliKeyboard.ActivitiesFragments.KeyboardActivity" />
-        <activity android:name=".QRCodeScanner.QRCodeActivity"></activity>
+        <activity android:name=".QRCodeScanner.QRCodeActivity" />
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="ocr" />
+
+        <activity android:name=".MobileHelp.ActivitiesFragment.RechargeActivity"></activity>
     </application>
 
 </manifest>

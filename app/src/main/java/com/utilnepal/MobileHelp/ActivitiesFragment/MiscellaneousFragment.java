@@ -39,11 +39,12 @@ public class MiscellaneousFragment extends Fragment {
 
         misNumbers = view.findViewById(R.id.misNumbers);
 
-        miscellaneousNumberAdapter = new MiscellaneousNumberAdapter(addFeatures(),getContext());
+        miscellaneousNumberAdapter = new MiscellaneousNumberAdapter(addFeatures(),getContext(),getActivity().getSupportFragmentManager());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         misNumbers.setLayoutManager(mLayoutManager);
         misNumbers.setItemAnimator(new DefaultItemAnimator());
         misNumbers.setAdapter(miscellaneousNumberAdapter);
+
 
         return view;
     }
@@ -58,6 +59,17 @@ public class MiscellaneousFragment extends Fragment {
                 "*400#",
                 "");
         features.add(nm);
+
+        nm = new MiscellaneousNumberFeatures(
+                getResources().getString(R.string.add_balance),
+                getResources().getString(R.string.add_balance_info),
+                "*903#",
+                "*9#",
+                "");
+        features.add(nm);
+
+
+
         nm = new MiscellaneousNumberFeatures(
                 getResources().getString(R.string.mobile_number),
                 getResources().getString(R.string.mobile_number_info),

@@ -30,4 +30,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
+
+    // for text detection api
+    implementation 'com.google.android.gms:play-services-vision:15.0.0'
+
 }
