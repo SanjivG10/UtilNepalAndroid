@@ -3,12 +3,15 @@ package com.utilnepal.MobileHelp.ActivitiesFragment;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -48,6 +51,8 @@ public class RechargeActivity extends AppCompatActivity {
 
         doneButton.setEnabled(false);
 
+        getPermission();
+
         final String type= getIntent().getStringExtra("type");
 
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +76,18 @@ public class RechargeActivity extends AppCompatActivity {
 
         //checking if textRecognizer is operational
         if (!textRecognizer.isOperational()) {
-            Toast.makeText(this, "Some Error Occured", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Dependency not available", Toast.LENGTH_SHORT).show();
+
+
+            IntentFilter lowstorageFilter = new IntentFilter(Intent.ACTION_DEVICE_STORAGE_LOW);
+            boolean hasLowStorage = registerReceiver(null, lowstorageFilter) != null;
+
+            if (hasLowStorage) {
+                Toast.makeText(this, "VERY LOW STORAGE", Toast.LENGTH_LONG).show();
+            }
+
+
+
             return;
         }
 
@@ -157,6 +173,14 @@ public class RechargeActivity extends AppCompatActivity {
 
     }
 
+    private void getPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 777);
+
+        }
+    }
+
     private Boolean checkIfDigitIsCorrect(String onlyDigits) {
         return onlyDigits.length()==16;
     }
@@ -179,7 +203,6 @@ public class RechargeActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 }
             }
             break;

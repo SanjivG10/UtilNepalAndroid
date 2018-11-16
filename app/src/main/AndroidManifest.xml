@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -47,11 +47,10 @@
         <activity android:name=".NepaliKeyboard.ActivitiesFragments.KeyboardActivity" />
         <activity android:name=".QRCodeScanner.QRCodeActivity" />
 
-        <meta-data
-            android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="ocr" />
+        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="ocr"/>
 
         <activity android:name=".MobileHelp.ActivitiesFragment.RechargeActivity"></activity>
+
     </application>
 
 </manifest>

@@ -34,4 +34,5 @@ dependencies {
     // for text detection api
     implementation 'com.google.android.gms:play-services-vision:15.0.0'
 
+
 }

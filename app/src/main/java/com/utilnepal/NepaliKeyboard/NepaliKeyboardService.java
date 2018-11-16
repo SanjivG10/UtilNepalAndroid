@@ -8,6 +8,7 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.AudioManager;
 import android.text.Layout;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +52,13 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
         switch (primaryCode)
         {
             case Keyboard.KEYCODE_DELETE:
-                ic.deleteSurroundingText(1,0);
+                CharSequence selectedText = ic.getSelectedText(0);
+                if (TextUtils.isEmpty(selectedText)) {
+                    ic.deleteSurroundingText(1, 0);
+                } else {
+                    ic.commitText("", 1);
+                }
+
                 break;
             case Keyboard.KEYCODE_SHIFT:
                 isCaps = !isCaps;
