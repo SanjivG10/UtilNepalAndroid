@@ -268,7 +268,7 @@
                 card_view:cardElevation="4dp"
                 card_view:cardCornerRadius="20dp"
                 card_view:contentPadding="10dp"
-                android:id="@+id/recommendedCardView"
+                android:id="@+id/qrCodeScannerCardView"
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -280,14 +280,14 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_adjust_black_24dp"
+                        android:src="@drawable/qrcode"
                         android:layout_gravity="center_horizontal"
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Recommended"
+                        android:text="QrCodeScanner"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_horizontal"
                         />

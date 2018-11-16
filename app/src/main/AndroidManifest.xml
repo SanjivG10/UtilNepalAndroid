@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -45,7 +44,8 @@
         </service>
 
         <activity android:name=".DateConverter.DateConverterActivity" />
-        <activity android:name=".NepaliKeyboard.ActivitiesFragments.KeyboardActivity"></activity>
+        <activity android:name=".NepaliKeyboard.ActivitiesFragments.KeyboardActivity" />
+        <activity android:name=".QRCodeScanner.QRCodeActivity"></activity>
     </application>
 
 </manifest>

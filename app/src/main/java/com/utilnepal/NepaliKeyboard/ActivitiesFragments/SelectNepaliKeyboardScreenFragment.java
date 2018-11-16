@@ -51,7 +51,7 @@ public class SelectNepaliKeyboardScreenFragment extends Fragment {
                         startActivity(intent);
                         getActivity().finish();
                     }
-                }, 5000);
+                }, 7000);
 
 
             }

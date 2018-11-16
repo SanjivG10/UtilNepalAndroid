@@ -15,6 +15,7 @@ import com.utilnepal.AudioRecorder.ActivitiesFragment.AudioRecorderActivity;
 import com.utilnepal.DateConverter.DateConverterActivity;
 import com.utilnepal.MobileHelp.ActivitiesFragment.MobileActivity;
 import com.utilnepal.NepaliKeyboard.ActivitiesFragments.KeyboardActivity;
+import com.utilnepal.QRCodeScanner.QRCodeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private CardView audioRecordCardView;
     private CardView mobileHelpCardView;
     private CardView dateconverterCardView;
-    private CardView recommenededCardView;
+    private CardView qrCodeScannerCardView;
     private ImageView torchImageView;
 
     //for torch light!
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         audioRecordCardView = findViewById(R.id.audioRecordCardView);
         mobileHelpCardView = findViewById(R.id.mobileHelpCardView);
         dateconverterCardView = findViewById(R.id.dateconverterCardView);
-        recommenededCardView = findViewById(R.id.recommendedCardView);
+        qrCodeScannerCardView = findViewById(R.id.qrCodeScannerCardView);
         torchImageView = findViewById(R.id.torchImageView);
 
         torchCardView.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +93,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,KeyboardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        qrCodeScannerCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,QRCodeActivity.class);
                 startActivity(intent);
             }
         });
