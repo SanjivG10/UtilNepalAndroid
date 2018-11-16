@@ -9,9 +9,11 @@ import android.inputmethodservice.KeyboardView;
 import android.media.AudioManager;
 import android.text.Layout;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 
 import com.utilnepal.R;
@@ -21,7 +23,7 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
     //initializing Keyboard
     private KeyboardView kv;
     private Keyboard keyboard;
-
+    private EditorInfo sEditorInfo;
 
     //forCapsLock
     private  boolean isCaps = false;
@@ -36,6 +38,20 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
     }
 
     @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case Keyboard.KEYCODE_DELETE:
+                InputConnection ic = getCurrentInputConnection();
+                ic.deleteSurroundingText(5, 0);
+                return true;
+            default:
+                return false;
+        }
+
+    }
+
+
+    @Override
     public void onPress(int primaryCode) {
 
     }
@@ -43,6 +59,12 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
     @Override
     public void onRelease(int primaryCode) {
 
+    }
+
+    @Override
+    public void onStartInputView(EditorInfo info, boolean restarting) {
+        sEditorInfo = info;
+        super.onStartInputView(info, restarting);
     }
 
     @Override
@@ -66,7 +88,25 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
                 kv.invalidateAllKeys();
                 break;
             case Keyboard.KEYCODE_DONE:
-                ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_ENTER));
+
+                switch (sEditorInfo.imeOptions & (EditorInfo.IME_MASK_ACTION|EditorInfo.IME_FLAG_NO_ENTER_ACTION)) {
+                    case EditorInfo.IME_ACTION_GO:
+                        ic.performEditorAction(EditorInfo.IME_ACTION_GO);
+                        break;
+                    case EditorInfo.IME_ACTION_NEXT:
+                        ic.performEditorAction(EditorInfo.IME_ACTION_NEXT);
+                        break;
+                    case EditorInfo.IME_ACTION_SEARCH:
+                        ic.performEditorAction(EditorInfo.IME_ACTION_SEARCH);
+                        break;
+                    case EditorInfo.IME_ACTION_SEND:
+                        ic.performEditorAction(EditorInfo.IME_ACTION_SEND);
+                        break;
+                    default:
+                        ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
+                        break;
+                }
+
                 break;
             case -999:
                 keyboard = new Keyboard(this, R.xml.keyboard_nepali);

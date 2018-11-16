@@ -91,6 +91,8 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
     private ArrayAdapter<String> dayEngToNepAdapter;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -255,7 +257,6 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
         while (totalEngDaysCount != 0) {
 
-            // getting the total number of days in month nepMonth in year nepYear
             int daysInIthMonth = EachMonthNumberOfDates.getNepaliMap().get(nepYear)[nepMonth];
 
             nepDay++; // incrementing nepali day
