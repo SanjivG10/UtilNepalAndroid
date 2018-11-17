@@ -48,6 +48,8 @@
         <activity android:name=".QRCodeScanner.QRCodeActivity" />
 
         <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="ocr"/>
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
 
         <activity android:name=".MobileHelp.ActivitiesFragment.RechargeActivity"></activity>
 

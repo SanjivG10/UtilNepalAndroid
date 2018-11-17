@@ -60,13 +60,13 @@ public class MiscellaneousFragment extends Fragment {
                 "");
         features.add(nm);
 
-        nm = new MiscellaneousNumberFeatures(
-                getResources().getString(R.string.add_balance),
-                getResources().getString(R.string.add_balance_info),
-                "*903#",
-                "*9#",
-                "");
-        features.add(nm);
+//        nm = new MiscellaneousNumberFeatures(
+//                getResources().getString(R.string.add_balance),
+//                getResources().getString(R.string.add_balance_info),
+//                "*903#",
+//                "*9#",
+//                "");
+//        features.add(nm);
 
 
 

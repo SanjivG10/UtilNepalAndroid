@@ -11,12 +11,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,12 +35,13 @@ public class RechargeActivity extends AppCompatActivity {
 
     private Button doneButton;
     private SurfaceView mSurfaceView;
-    private TextView mTextView;
     private TextRecognizer textRecognizer;
     private Context context;
     private CameraSource mCameraSource;
     private static final int RequestCameraPermissionID = 1001;
     private String numberToDail;
+
+    private EditText codeGenerated;
 
 
     @Override
@@ -47,9 +51,9 @@ public class RechargeActivity extends AppCompatActivity {
 
         doneButton = findViewById(R.id.rechargeDoneButton);
         mSurfaceView = findViewById(R.id.surface_camera_preview);
-        mTextView = findViewById(R.id.generated_code);
-
+        codeGenerated = findViewById(R.id.generated_code);
         doneButton.setEnabled(false);
+        numberToDail ="";
 
         getPermission();
 
@@ -58,19 +62,42 @@ public class RechargeActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(type=="NTC")
+                Log.e("This is sim check", type + " <=TYPE");
+                if(type.equals("NTC"))
                 {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode("*412*"+numberToDail+"#")));
                     startActivity(intent);
                 }
 
-                else if(type=="NCELL")
+                else if(type.equals("NCELL"))
                 {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode("*102*"+numberToDail+"#")));
                     startActivity(intent);
                 }
             }
         });
+
+
+
+        codeGenerated.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                CheckNumberToDail();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                CheckNumberToDail();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                CheckNumberToDail();
+
+            }
+        });
+
 
         textRecognizer = new TextRecognizer.Builder(this).build();
 
@@ -141,7 +168,10 @@ public class RechargeActivity extends AppCompatActivity {
                 final SparseArray<TextBlock> items = detections.getDetectedItems();
                 if(items.size() != 0)
                 {
-                    mTextView.post(new Runnable() {
+
+
+
+                    codeGenerated.post(new Runnable() {
                         @Override
                         public void run() {
                             StringBuilder stringBuilder = new StringBuilder();
@@ -154,23 +184,34 @@ public class RechargeActivity extends AppCompatActivity {
                             String myText = stringBuilder.toString();
 
                             String onlyDigits = getOnlyNumbers(myText);
-                            mTextView.setText(myText);
-
-                            if(checkIfDigitIsCorrect(onlyDigits))
-                            {
-                                doneButton.setEnabled(true);
-                                numberToDail = onlyDigits;
-                            }
-                            else
-                            {
-                                doneButton.setEnabled(false);
-                            }
+                            codeGenerated.setText(myText);
+                            numberToDail = codeGenerated.getText().toString();
                         }
                     });
                 }
             }
         });
 
+    }
+
+    private void CheckNumberToDail()
+    {
+        Log.e("Checking Number", numberToDail+ "THIS IS THE NUMBER");
+        numberToDail = codeGenerated.getText().toString();
+        numberToDail = getOnlyNumbers(numberToDail);
+        if(checkIfDigitIsCorrect(numberToDail))
+        {
+
+            doneButton.setEnabled(true);
+            Log.e("Checking Number", numberToDail+ "TRUE");
+
+        }
+        else
+        {
+            doneButton.setEnabled(false);
+            Log.e("Checking Number", numberToDail+ "FALSE");
+
+        }
     }
 
     private void getPermission() {
