@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.ads.AdView;
 import com.utilnepal.R;
 
 import java.util.Timer;
@@ -26,11 +28,16 @@ public class SelectNepaliKeyboardScreenFragment extends Fragment {
     public static Timer timer;
 
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.from(getContext()).inflate(R.layout.select_nepali_keyboard_fragment,container,false);
+
+
+
+
 
         return v;
     }
@@ -57,20 +64,26 @@ public class SelectNepaliKeyboardScreenFragment extends Fragment {
 
     private void enableKeyboard()
     {
-        Intent enableIntent = new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS);
-        enableIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getActivity().startActivity(enableIntent);
-        Log.e("Enable Keyboard",  "Checking if it has any value");
+        startActivityForResult(new Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS),1);
 
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                checkIfKeyboardIsEnabled();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        String list = imm.getEnabledInputMethodList().toString();
+
+        if (requestCode == 1) {
+            if (checkIfKeyboardIsEnabled()) {
+                    Intent intent = new Intent(getContext(), KeyboardActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+
+            } else {
+                Toast.makeText(getContext(), "Keyboard Not Selected", Toast.LENGTH_LONG).show();
             }
-        }, 0, 3000);
-
-
+        }
     }
 
     private Boolean checkIfKeyboardIsEnabled() {
@@ -82,8 +95,6 @@ public class SelectNepaliKeyboardScreenFragment extends Fragment {
 
         if(list.contains(KEYBOARDID))
         {
-            timer.purge();
-            timer.cancel();
             Intent intent = new Intent(getContext(), KeyboardActivity.class);
             startActivity(intent);
             getActivity().finish();

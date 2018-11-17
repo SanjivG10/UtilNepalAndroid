@@ -11,6 +11,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.utilnepal.DateConverter.utils.EachMonthNumberOfDates;
 import com.utilnepal.R;
 
@@ -90,7 +93,7 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
     private ArrayAdapter<String> monthEngToNepAdapter;
     private ArrayAdapter<String> dayEngToNepAdapter;
 
-
+    private AdView adView;
 
 
     @Override
@@ -102,6 +105,11 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
         convertToNepali = findViewById(R.id.buttonConvertToNepali);
 
         dateConvertedTextView = findViewById(R.id.dateConvertedTextView);
+
+        MobileAds.initialize(this,"ca-app-pub-3940256099942544~3347511713");
+        adView = findViewById(R.id.googleAdsDateConverter);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        adView.loadAd(adRequest);
 
 
         // Setting Year

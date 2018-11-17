@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.utilnepal.AudioRecorder.ActivitiesFragment.AudioRecorderActivity;
 import com.utilnepal.DateConverter.DateConverterActivity;
 import com.utilnepal.MobileHelp.ActivitiesFragment.MobileActivity;
@@ -32,11 +35,18 @@ public class MainActivity extends AppCompatActivity {
     private Boolean hasFlash;
     private android.hardware.Camera camera;
     private android.hardware.Camera.Parameters p;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this,"ca-app-pub-3940256099942544~3347511713");
+        adView = findViewById(R.id.mainActivityAdView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        adView.loadAd(adRequest);
+
         initialize();
 
         is_flash_on = false;
