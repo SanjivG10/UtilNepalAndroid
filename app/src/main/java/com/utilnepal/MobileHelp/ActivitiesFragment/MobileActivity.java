@@ -42,6 +42,7 @@ public class MobileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mobile);
 
         MobileAds.initialize(this,"ca-app-pub-3940256099942544~3347511713");
+
         adView = findViewById(R.id.mobileViewAdView);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         adView.loadAd(adRequest);
