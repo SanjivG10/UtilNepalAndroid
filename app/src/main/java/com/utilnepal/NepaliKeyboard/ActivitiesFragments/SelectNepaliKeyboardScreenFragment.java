@@ -17,9 +17,13 @@ import android.widget.Button;
 
 import com.utilnepal.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class SelectNepaliKeyboardScreenFragment extends Fragment {
 
     private static String KEYBOARDID = "com.utilnepal/.NepaliKeyboard.NepaliKeyboardService";
+    public static Timer timer;
 
 
     @Nullable
@@ -40,19 +44,10 @@ public class SelectNepaliKeyboardScreenFragment extends Fragment {
         selectNepaliKeyboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean x  = checkIfKeyboardIsSelected();
-                Log.e("FragmentManager", "IT IS TRUE" + String.valueOf(x));
-
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(getActivity(), KeyboardActivity.class);
-                        startActivity(intent);
-                        getActivity().finish();
-                    }
-                }, 7000);
-
+                if(!checkIfKeyboardIsEnabled())
+                {
+                    enableKeyboard();
+                }
 
             }
         });
@@ -60,19 +55,38 @@ public class SelectNepaliKeyboardScreenFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private Boolean checkIfKeyboardIsSelected() {
+    private void enableKeyboard()
+    {
         Intent enableIntent = new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS);
         enableIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getActivity().startActivity(enableIntent);
+        Log.e("Enable Keyboard",  "Checking if it has any value");
 
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                checkIfKeyboardIsEnabled();
+            }
+        }, 0, 3000);
+
+
+    }
+
+    private Boolean checkIfKeyboardIsEnabled() {
 
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         String list = imm.getEnabledInputMethodList().toString();
 
-        Log.e("List", list);
+        Log.e("Listing", list);
 
         if(list.contains(KEYBOARDID))
         {
+            timer.purge();
+            timer.cancel();
+            Intent intent = new Intent(getContext(), KeyboardActivity.class);
+            startActivity(intent);
+            getActivity().finish();
             return true;
         }
 

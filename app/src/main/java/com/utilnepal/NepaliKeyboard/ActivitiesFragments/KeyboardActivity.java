@@ -15,6 +15,8 @@ import com.utilnepal.NepaliKeyboard.ActivitiesFragments.SelectNepaliKeyboardScre
 import com.utilnepal.NepaliKeyboard.utils.InputMethodChangeReceiver;
 import com.utilnepal.R;
 
+import java.util.Timer;
+
 public class KeyboardActivity extends AppCompatActivity {
 
     private Boolean checkIfKeyboardSelected;
@@ -28,6 +30,13 @@ public class KeyboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_keyboard);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if(SelectNepaliKeyboardScreenFragment.timer!=null)
+        {
+            SelectNepaliKeyboardScreenFragment.timer.purge();
+            SelectNepaliKeyboardScreenFragment.timer.cancel();
+            SelectNepaliKeyboardScreenFragment.timer = null;
+        }
 
         mReceiver = new InputMethodChangeReceiver();
         mIntentFilter =  new IntentFilter(Intent.ACTION_INPUT_METHOD_CHANGED);
