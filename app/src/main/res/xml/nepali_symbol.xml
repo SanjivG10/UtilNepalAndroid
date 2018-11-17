@@ -52,7 +52,7 @@
         <Key android:codes="-3000" android:keyLabel="क्ष"/>
         <Key android:codes="-3001" android:keyLabel="त्र"/>
         <Key android:codes="-3002" android:keyLabel="ज्ञ"/>
-        <Key android:codes="0x094C" android:keyLabel="ौ"/>
+        <Key android:codes="0x0964" android:keyLabel="।"/>
         <Key android:codes="-5" android:keyLabel="✖"
             android:keyEdgeFlags="right" />
     </Row>
