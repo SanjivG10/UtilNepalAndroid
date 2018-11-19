@@ -1,12 +1,21 @@
 package com.utilnepal;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Camera;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -29,30 +38,42 @@ public class MainActivity extends AppCompatActivity {
     private CardView dateconverterCardView;
     private CardView qrCodeScannerCardView;
     private ImageView torchImageView;
+    private String cameraId;
 
     //for torch light!
     private Boolean is_flash_on;
+    private String checkIfFlashOnString;
     private Boolean hasFlash;
     private android.hardware.Camera camera;
     private android.hardware.Camera.Parameters p;
     private AdView adView;
+
+    //for higherAPI
+    private static final int CAMERA_REQUEST = 50;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(this,"ca-app-pub-3940256099942544~3347511713");
-        adView = findViewById(R.id.mainActivityAdView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        adView.loadAd(adRequest);
 
         initialize();
 
-        is_flash_on = false;
+//        MobileAds.initialize(this,"ca-app-pub-6365618181796618~5539213127");
+//        adView = findViewById(R.id.mainActivityAdView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        adView.loadAd(adRequest);
+
+
         hasFlash= getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+        is_flash_on = false;
 
     }
+
 
     private void initialize() {
         // get camera permission!
@@ -71,7 +92,23 @@ public class MainActivity extends AppCompatActivity {
         torchCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                torch_func();
+
+                if(hasFlash)
+                {
+                    if (is_flash_on) {
+                    // turn off flash
+                    turnOffFlash();
+                    } else {
+                        turnOnFlash();
+                    }
+                }
+
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Flash not supported", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
@@ -115,81 +152,103 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
-    private void torch_func() {
-
-        if (hasFlash) {
-            if (is_flash_on)
-                flashLightOff();
-            else
-                flashLightOn();
-        } else {
-            Toast.makeText(MainActivity.this, "No flash available on your device",
-                    Toast.LENGTH_SHORT).show();
+    private void getCamera() {
+        if (camera == null) {
+            try {
+                camera = Camera.open();
+                p = camera.getParameters();
+            } catch (RuntimeException e) {
+                Log.e("Camera Null", "Camera is null");
+            }
         }
-
     }
 
-    private void flashLightOff() {
-        try {
-            torchImageView.setImageResource(R.drawable.ic_lightbulb_outline_black_24dp);
-            camera.stopPreview();
-            camera.release();
-            is_flash_on = false;
-        }
-        catch (Exception e)
-        {
-            Toast.makeText(this," Unknown Error Occured here " + e.getMessage(),Toast.LENGTH_SHORT).show();
-        }
 
-    }
 
-    private void flashLightOn()
-    {
-        try
-        {
-            torchImageView.setImageResource(R.drawable.ic_lightbulb_outline_yellow_64dp);
-            camera = android.hardware.Camera.open();
+    private void turnOnFlash() {
+        if (!is_flash_on) {
+            if (camera == null || p == null) {
+                return;
+            }
+
             p = camera.getParameters();
-            p.setFlashMode(android.hardware.Camera.Parameters.FLASH_MODE_TORCH);
+            p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
             camera.setParameters(p);
             camera.startPreview();
-            is_flash_on=true;
+            is_flash_on = true;
+            torchImageView.setImageResource(R.drawable.ic_lightbulb_outline_yellow_64dp);
+
+            // changing button/switch image
         }
-        catch (Exception e)
-        {
-            Toast.makeText(this,"Unknown Error Occured "+e.getMessage(),Toast.LENGTH_SHORT).show();
+
+    }
+
+
+    private void turnOffFlash() {
+        if (is_flash_on) {
+            if (camera == null || p == null) {
+                return;
+            }
+
+            p = camera.getParameters();
+            p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+            camera.setParameters(p);
+            camera.stopPreview();
+            is_flash_on = false;
+
+            // changing button/switch image
+            torchImageView.setImageResource(R.drawable.ic_lightbulb_outline_black_24dp);
         }
+    }
+
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // on pause turn off the flash
+        turnOffFlash();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        getCamera();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if(is_flash_on)
-        {
-            flashLightOff();
-        }
-    }
+        turnOffFlash();
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if(is_flash_on)
-        {
-            flashLightOff();
-        }
-    }
+        // on stop release the camera
+        if (camera != null) {
+            camera.release();
 
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        if(is_flash_on)
-        {
-            flashLightOn();
+            camera = null;
         }
+        turnOffFlash();
     }
 }
 

@@ -41,11 +41,11 @@ public class MobileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile);
 
-        MobileAds.initialize(this,"ca-app-pub-3940256099942544~3347511713");
-
-        adView = findViewById(R.id.mobileViewAdView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        adView.loadAd(adRequest);
+//        MobileAds.initialize(this,"ca-app-pub-6365618181796618~5539213127");
+//
+//        adView = findViewById(R.id.mobileViewAdView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        adView.loadAd(adRequest);
 
 
         toolbar = findViewById(R.id.toolbar);

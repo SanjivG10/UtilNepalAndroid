@@ -20,6 +20,7 @@ import com.utilnepal.R;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +35,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.text.DateFormatSymbols;
+
 
 public class DateConverterActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener {
 
@@ -49,6 +52,8 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
     private Button convertToEnglish;
     private Button  convertToNepali;
+
+    private TextView todaysDateTextView;
 
     private TextView dateConvertedTextView;
 
@@ -95,6 +100,8 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
     private AdView adView;
 
+    private  Calendar currentEngDate;
+    private Calendar baseEngDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,13 +110,14 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
         convertToEnglish = findViewById(R.id.buttonConvertToEnglish);
         convertToNepali = findViewById(R.id.buttonConvertToNepali);
+        todaysDateTextView = findViewById(R.id.todaysDateTextView);
 
         dateConvertedTextView = findViewById(R.id.dateConvertedTextView);
 
-        MobileAds.initialize(this,"ca-app-pub-3940256099942544~3347511713");
-        adView = findViewById(R.id.googleAdsDateConverter);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        adView.loadAd(adRequest);
+//        MobileAds.initialize(this,"ca-app-pub-6365618181796618~5539213127");
+//        adView = findViewById(R.id.googleAdsDateConverter);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        adView.loadAd(adRequest);
 
 
         // Setting Year
@@ -191,13 +199,26 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
          monthEngSpinner.setOnItemSelectedListener(this);
          dayEngSpinner.setOnItemSelectedListener(this);
 
+         todaysDateTextView.setText(getTodayDateNepali());
+
 
         convertToEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 long daysCount = getTotalDaysCount();
+
+
+                Log.e("Time taken again", String.valueOf(System.currentTimeMillis())  + " Converting to English");
+
                 String date = convertToEnglish(daysCount);
+
+                Log.e("Time taken again", String.valueOf(System.currentTimeMillis())  + " Converting to English" );
+
                 dateConvertedTextView.setText(date);
+
+
 
             }
         });
@@ -206,57 +227,109 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
             @Override
             public void onClick(View v) {
 
-                Calendar currentEngDate = new GregorianCalendar();
-                int engYear = startingEngYearForSelection;
-                int engMonth = startingEngMonthForSelection;
-                int engDay = startingEngDayForSelection;
+                long daysCount = getTotalDaysCountEnglish();
 
-                if(yearEngSpinner.getSelectedItem()!=null)
-                {
-                    engYear = Integer.parseInt(yearEngSpinner.getSelectedItem().toString());
-                }
+                String date = convertToNepaliFunction(daysCount);
 
-                if(monthEngSpinner.getSelectedItem()!=null)
-                {
-                    Date date = null;
-                    try {
-                        date = new SimpleDateFormat("MMMM").parse(monthEngSpinner.getSelectedItem().toString());
-                        Calendar cal = Calendar.getInstance();
-                        cal.setTime(date);
+                dateConvertedTextView.setText(date);
 
-                        engMonth = Integer.parseInt(String.valueOf(cal.get(Calendar.MONTH)));
-                        Log.e("Month Value",engMonth + " < This is the eng month Selected");
-
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                        engMonth = 1;
-                        Log.e("Error Some Error", e.getMessage());
-                    }
-
-                }
-
-                if(dayEngSpinner.getSelectedItem()!=null)
-                {
-                    engDay = Integer.parseInt(dayEngSpinner.getSelectedItem().toString());
-                }
-
-                currentEngDate.set(engYear, engMonth, engDay);
-
-                Calendar baseEngDate = new GregorianCalendar();
-
-                baseEngDate.set(startingEngYearForSelection, startingEngMonthForSelection-1, startingEngDayForSelection);
-
-                long totalEngDaysCount = daysBetween(baseEngDate, currentEngDate);
-
-                String textOfNepaliVersion = convertToNepaliFunction(totalEngDaysCount);
-
-                dateConvertedTextView.setText(textOfNepaliVersion);
 
             }
 
         });
+    }
+
+    private String getTodayDateNepali() {
+
+        Calendar now = Calendar.getInstance();
+        Calendar baseCalendar = new GregorianCalendar();
+
+        now.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH) , now.get(Calendar.DAY_OF_MONTH));
+
+        Log.e(" Month Todays ", String.valueOf(now.get(Calendar.MONTH)) + " "+ startingEngMonthForSelection);
+
+        baseCalendar.set(startingEngYearForSelection, startingEngMonthForSelection-1, startingEngDayForSelection);
+
+        long diff =now.getTimeInMillis()-baseCalendar.getTimeInMillis();
+
+        diff = Math.round(diff * 1f / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
+
+
+        return convertToNepaliFunction(diff);
+    }
+
+    private long getTotalDaysCountEnglish() {
+        currentEngDate = new GregorianCalendar();
+        int engYear = startingEngYearForSelection;
+        int engMonth = startingEngMonthForSelection;
+        int engDay = startingEngDayForSelection;
+
+        if(yearEngSpinner.getSelectedItem()!=null && monthEngSpinner.getSelectedItem()!=null && dayEngSpinner.getSelectedItem()!=null )
+        {
+            engYear = Integer.parseInt(yearEngSpinner.getSelectedItem().toString());
+            engDay = Integer.parseInt(dayEngSpinner.getSelectedItem().toString());
+            String engMonthString = shortMonthToLongMonthMatcher.get(monthEngSpinner.getSelectedItem().toString());
+            if(engMonthString!=null)
+            {
+                engMonth = getDateInEnglish(engMonthString)-1;
+            }
+            else
+            {
+                engMonth = 1;
+            }
+        }
+
+        currentEngDate.set(engYear, engMonth, engDay);
+
+        baseEngDate = new GregorianCalendar();
+
+        baseEngDate.set(startingEngYearForSelection, startingEngMonthForSelection-1, startingEngDayForSelection);
+
+
+
+        long diff =currentEngDate.getTimeInMillis()-baseEngDate.getTimeInMillis();
+
+        diff = Math.round(diff * 1f / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
+
+
+        return diff;
+
 
     }
+
+    private int getDateInEnglish(String engMonthString) {
+        switch (engMonthString)
+        {
+            case "January":
+                return 1;
+            case "February":
+                return 2;
+            case "March":
+                return 3;
+            case "April":
+                return 4;
+            case "May":
+                return 5;
+            case "June":
+                return 6;
+            case "July":
+                return 7;
+            case "August":
+                return 8;
+            case "September":
+                return 9;
+            case "Octobor":
+                return 10;
+            case "November":
+                return 11;
+            case "December":
+                return 12;
+            default:
+                return 0;
+
+        }
+    }
+
 
     private String convertToNepaliFunction(long totalEngDaysCount) {
         int nepYear = startingNepYearForSelection;
@@ -267,7 +340,7 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
             int daysInIthMonth = EachMonthNumberOfDates.getNepaliMap().get(nepYear)[nepMonth];
 
-            nepDay++; // incrementing nepali day
+            nepDay++;
 
             if (nepDay > daysInIthMonth) {
                 nepMonth++;
@@ -278,27 +351,20 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
                 nepMonth = 1;
             }
 
-            dayOfWeek++; // count the days in terms of 7 days
+            dayOfWeek++;
             if (dayOfWeek > 7) {
                 dayOfWeek = 1;
             }
             totalEngDaysCount--;
         }
 
-        return String.valueOf(nepYear) +" "+String.valueOf(nepMonth)+" "+ String.valueOf(nepDay) ;
+        String nepaliYear = convertEngYearToNepWithTextReplacement(String.valueOf(nepYear));
+        String [] months = getMonthArray();
+        String nepaliMonth = months[nepMonth-1];
+        String nepaliDay = convertEngYearToNepWithTextReplacement(String.valueOf(nepDay));
 
-    }
+        return nepaliYear +"  "+nepaliMonth+" "+ nepaliDay ;
 
-    private long daysBetween(Calendar startDate, Calendar endDate) {
-
-        Calendar date = (Calendar) startDate.clone();
-        long daysBetweens = 0;
-        while (date.before(endDate)) {
-            date.add(startDate.DAY_OF_MONTH, 1);
-            daysBetweens++;
-        }
-
-        return daysBetweens;
     }
 
     private String [] getMonthForEnglish() {
@@ -375,7 +441,9 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
             dayscount--;
         }
 
-        return String.valueOf(engYear) +" "+String.valueOf(engMonth)+" "+ String.valueOf(engDay) ;
+        String actualName = new DateFormatSymbols().getMonths()[engMonth-1];
+
+        return String.valueOf(engYear) +"  "+actualName+"  "+ String.valueOf(engDay) ;
     }
 
     public static boolean isLeapYear(int year) {
@@ -385,8 +453,6 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
             return year % 4 == 0;
         }
     }
-
-
 
 
 
@@ -436,6 +502,22 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
         spinnerEngYear = spinnerEngYear.replace("७","7");
         spinnerEngYear = spinnerEngYear.replace("८","8");
         spinnerEngYear = spinnerEngYear.replace("९","9");
+        return spinnerEngYear;
+    }
+
+
+    private String convertEngYearToNepWithTextReplacement(String spinnerEngYear) {
+
+        spinnerEngYear = spinnerEngYear.replace("0","०");
+        spinnerEngYear = spinnerEngYear.replace("1","१");
+        spinnerEngYear = spinnerEngYear.replace("2","२");
+        spinnerEngYear = spinnerEngYear.replace("3","३");
+        spinnerEngYear = spinnerEngYear.replace("4","४");
+        spinnerEngYear = spinnerEngYear.replace("5","५");
+        spinnerEngYear = spinnerEngYear.replace("6","६");
+        spinnerEngYear = spinnerEngYear.replace("7","७");
+        spinnerEngYear = spinnerEngYear.replace("8","८");
+        spinnerEngYear = spinnerEngYear.replace("9","९");
         return spinnerEngYear;
     }
 
@@ -536,7 +618,9 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
                         date = new SimpleDateFormat("MMM").parse( shortMonthToLongMonthMatcher.get(monthEngSpinner.getSelectedItem().toString()));
                         Calendar cal = Calendar.getInstance();
                         cal.setTime(date);
-                        monthSelectedOnClickStringEnglishInteger=cal.get(Calendar.MONTH);
+                        monthSelectedOnClickStringEnglishInteger=cal.get(Calendar.MONTH)+1;
+
+                        Log.e("Month Year Day", String.valueOf(monthSelectedOnClickStringEnglishInteger) +  yearSelectedOnClickStringForEnglishInteger + dayEngSpinner.getSelectedItem().toString());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

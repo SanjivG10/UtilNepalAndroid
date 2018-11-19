@@ -115,6 +115,8 @@
     <string name="checkNepaliByTyping"> केही टाईप गरेर हेर्नुहोस्   </string>
     <string name="successKeyboardText">बधाई छ! नेपाली किबोर्ड इनेबल भयो  </string>
 
+    <string name="aajhaKoMiti"> आजको मिती </string>
+
 
     <string name="rechargeViaCameraScannerInfo">
 रीचार्ज कार्ड मा भएको नम्बर कोर्नुहोस ।

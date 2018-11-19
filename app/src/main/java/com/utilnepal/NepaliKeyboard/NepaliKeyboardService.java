@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 
+import com.utilnepal.NepaliKeyboard.ActivitiesFragments.CandidatesView;
 import com.utilnepal.R;
 
 public class NepaliKeyboardService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
@@ -24,6 +25,8 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
     private KeyboardView kv;
     private Keyboard keyboard;
     private EditorInfo sEditorInfo;
+    private CandidatesView candidatesView;
+
 
     //forCapsLock
     private  boolean isCaps = false;
@@ -197,4 +200,10 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
     }
 
 
+//    @Override
+//    public View onCreateCandidatesView() {
+//        candidatesView = new CandidatesView(getApplicationContext());
+//        candidatesView.setService((NepaliKeyboardService) getApplicationContext());
+//        return candidatesView;
+//    }
 }
