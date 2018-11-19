@@ -3,12 +3,66 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:id="@+id/stepperID"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="end"
+            >
+
+            <ImageView
+                android:id="@+id/circle_one"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/done"
+                android:layout_marginTop="4dp"
+                />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="4dp"
+            android:background="#32BA7C" />
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            >
+            <ImageView
+                android:id="@+id/circle_two"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/not_done"
+                android:layout_marginTop="4dp"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/selectNepaliKeyboard"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:textColor="#000"
+        android:textSize="24sp"
+        android:fontFamily="serif"
         android:id="@+id/enableKeyboardText"
         />
 
@@ -17,14 +71,14 @@
         android:layout_height="wrap_content"
         android:text="@string/successKeyboardText"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
         android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:fontFamily="monospace"
+        android:fontFamily="serif"
+        android:textColor="#000"
         android:textSize="25sp"
+        android:layout_below="@+id/stepperID"
         android:id="@+id/successKeyboardText"
         android:visibility="gone"
+
         />
 
     <Button

@@ -1,5 +1,7 @@
 package com.utilnepal.NepaliKeyboard.ActivitiesFragments;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.utilnepal.R;
@@ -25,6 +28,8 @@ public class EnableNepaliKeyboardFragment extends Fragment {
     public static Button clickButton;
     public static TextView successInfo;
 
+    private static ImageView circle_two;
+
     private String keyboard;
     private static final String MY_KEYBOARD_ID = "com.utilnepal/.NepaliKeyboard.NepaliKeyboardService";
 
@@ -37,6 +42,8 @@ public class EnableNepaliKeyboardFragment extends Fragment {
         editTextForTyping = view.findViewById(R.id.editTextForTyping);
         enableKeyboardText = view.findViewById(R.id.enableKeyboardText);
         successInfo = view.findViewById(R.id.successKeyboardText);
+
+        circle_two = view.findViewById(R.id.circle_two);
 
         keyboard = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
         checkIfKeyboardIsSelected(keyboard);
@@ -62,6 +69,8 @@ public class EnableNepaliKeyboardFragment extends Fragment {
             editTextForTyping.setVisibility(View.VISIBLE);
             clickButton.setVisibility(View.GONE);
             successInfo.setVisibility(View.VISIBLE);
+
+            circle_two.setImageResource(R.drawable.done);
         }
 
         else
@@ -71,6 +80,8 @@ public class EnableNepaliKeyboardFragment extends Fragment {
             editTextForTyping.setVisibility(View.GONE);
             clickButton.setVisibility(View.VISIBLE);
             successInfo.setVisibility(View.GONE);
+            circle_two.setImageResource(R.drawable.not_done);
+
         }
 
     }
