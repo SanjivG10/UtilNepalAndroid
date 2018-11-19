@@ -1,11 +1,14 @@
 package com.utilnepal.MobileHelp.ActivitiesFragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ public class MiscellaneousFragment extends Fragment {
     private ArrayList<MiscellaneousNumberFeatures> features;
     private RecyclerView misNumbers;
     private MiscellaneousNumberAdapter miscellaneousNumberAdapter;
+    private TelephonyManager telemamanger;
 
     public MiscellaneousFragment() {
         // Required empty public constructor
@@ -45,6 +49,12 @@ public class MiscellaneousFragment extends Fragment {
         misNumbers.setItemAnimator(new DefaultItemAnimator());
         misNumbers.setAdapter(miscellaneousNumberAdapter);
 
+        telemamanger = (TelephonyManager)
+                getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+
+        String simOperatorname = telemamanger.getNetworkOperator();
+        Log.e(" Sim Operator Name ", simOperatorname + " This is the name");
+
 
         return view;
     }
@@ -61,12 +71,12 @@ public class MiscellaneousFragment extends Fragment {
         features.add(nm);
 
 //        nm = new MiscellaneousNumberFeatures(
-//                getResources().getString(R.string.add_balance),
-//                getResources().getString(R.string.add_balance_info),
-//                "*903#",
-//                "*9#",
-//                "");
-//        features.add(nm);
+////                getResources().getString(R.string.add_balance),
+////                getResources().getString(R.string.add_balance_info),
+////                "*903#",
+////                "*9#",
+////                "");
+////        features.add(nm);
 
 
 
