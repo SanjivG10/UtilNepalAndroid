@@ -27,6 +27,7 @@ public class EnableNepaliKeyboardFragment extends Fragment {
     public static TextView enableKeyboardText;
     public static Button clickButton;
     public static TextView successInfo;
+    public static TextView successKeyboardText2;
 
     private static ImageView circle_two;
 
@@ -42,6 +43,7 @@ public class EnableNepaliKeyboardFragment extends Fragment {
         editTextForTyping = view.findViewById(R.id.editTextForTyping);
         enableKeyboardText = view.findViewById(R.id.enableKeyboardText);
         successInfo = view.findViewById(R.id.successKeyboardText);
+        successKeyboardText2 = view.findViewById(R.id.successKeyboardText2);
 
         circle_two = view.findViewById(R.id.circle_two);
 
@@ -69,7 +71,7 @@ public class EnableNepaliKeyboardFragment extends Fragment {
             editTextForTyping.setVisibility(View.VISIBLE);
             clickButton.setVisibility(View.GONE);
             successInfo.setVisibility(View.VISIBLE);
-
+            successKeyboardText2.setVisibility(View.VISIBLE);
             circle_two.setImageResource(R.drawable.done);
         }
 
@@ -80,6 +82,7 @@ public class EnableNepaliKeyboardFragment extends Fragment {
             editTextForTyping.setVisibility(View.GONE);
             clickButton.setVisibility(View.VISIBLE);
             successInfo.setVisibility(View.GONE);
+            successKeyboardText2.setVisibility(View.GONE);
             circle_two.setImageResource(R.drawable.not_done);
 
         }

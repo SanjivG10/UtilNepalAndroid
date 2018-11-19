@@ -113,7 +113,9 @@
     <string name="selectNepaliKeyboard">नेपाली किबोर्ड सेलेक्ट गर्नुहोस् </string>
     <string name="enableNepaliKeyboard"> नेपाली किबोर्ड इनेबल गर्नुहोस् </string>
     <string name="checkNepaliByTyping"> केही टाईप गरेर हेर्नुहोस्   </string>
-    <string name="successKeyboardText">बधाई छ! नेपाली किबोर्ड इनेबल भयो  </string>
+    <string name="successKeyboardText">बधाई छ!</string>
+    <string name="successKeyboardText2">नेपाली किबोर्ड इनेबल भयो  </string>
+
 
     <string name="aajhaKoMiti"> आजको मिती </string>
 
