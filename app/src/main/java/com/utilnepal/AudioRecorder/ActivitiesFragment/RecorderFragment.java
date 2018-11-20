@@ -11,6 +11,7 @@ import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chibde.visualizer.LineVisualizer;
 import com.utilnepal.AudioRecorder.Files.FileNames;
 import com.utilnepal.AudioRecorder.adapters.RecordingAdapter;
 import com.utilnepal.R;
@@ -77,10 +79,18 @@ public class RecorderFragment extends Fragment {
         mFileName = getContext().getFilesDir().getPath();
         mFileName += "/recordings";
 
+
+
+
+
+
+
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startRecording();
+
+
                 playButton.setEnabled(false);
                 stopButton.setEnabled(true);
             }

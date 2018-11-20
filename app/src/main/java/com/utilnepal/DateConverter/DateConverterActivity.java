@@ -54,7 +54,7 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
     private Button convertToEnglish;
     private Button  convertToNepali;
 
-    private TextView todaysDateTextView;
+
 
     private TextView dateConvertedTextView;
 
@@ -111,7 +111,6 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
 
         convertToEnglish = findViewById(R.id.buttonConvertToEnglish);
         convertToNepali = findViewById(R.id.buttonConvertToNepali);
-        todaysDateTextView = findViewById(R.id.todaysDateTextView);
 
         dateConvertedTextView = findViewById(R.id.dateConvertedTextView);
 
@@ -200,13 +199,11 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
          monthEngSpinner.setOnItemSelectedListener(this);
          dayEngSpinner.setOnItemSelectedListener(this);
 
-         todaysDateTextView.setText(getTodayDateNepali());
 
 
         convertToEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 long daysCount = getTotalDaysCount();
 
@@ -238,25 +235,6 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
             }
 
         });
-    }
-
-    private String getTodayDateNepali() {
-
-        Calendar now = Calendar.getInstance();
-        Calendar baseCalendar = new GregorianCalendar();
-
-        now.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH) , now.get(Calendar.DAY_OF_MONTH));
-
-        Log.e(" Month Todays ", String.valueOf(now.get(Calendar.MONTH)) + " "+ startingEngMonthForSelection);
-
-        baseCalendar.set(startingEngYearForSelection, startingEngMonthForSelection-1, startingEngDayForSelection);
-
-        long diff =now.getTimeInMillis()-baseCalendar.getTimeInMillis();
-
-        diff = Math.round(diff * 1f / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
-
-
-        return convertToNepaliFunction(diff);
     }
 
     private long getTotalDaysCountEnglish() {
@@ -337,6 +315,9 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
         int nepMonth = startingNepMonthForSelection;
         int nepDay = startingNepDayForSelection;
 
+        long m = totalEngDaysCount;
+        long year, week, day;
+
         while (totalEngDaysCount != 0) {
 
             int daysInIthMonth = EachMonthNumberOfDates.getNepaliMap().get(nepYear)[nepMonth];
@@ -352,10 +333,6 @@ public class DateConverterActivity extends AppCompatActivity  implements Adapter
                 nepMonth = 1;
             }
 
-            dayOfWeek++;
-            if (dayOfWeek > 7) {
-                dayOfWeek = 1;
-            }
             totalEngDaysCount--;
         }
 

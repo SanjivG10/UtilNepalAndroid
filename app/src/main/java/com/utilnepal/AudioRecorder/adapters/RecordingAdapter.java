@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,8 +97,9 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
 
     @Override
     public int getItemCount() {
-        if(fileNames.isEmpty())
+        if(fileNames==null)
         {
+            Log.e(" Filesname", "FILENAMES ARE NULL");
             return 0;
         }
         return fileNames.size();
@@ -107,13 +110,18 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
         private TextView recordingName;
         private ImageView playButton;
         private ImageView pauseButton;
+        public ImageView thumbnail;
+        public RelativeLayout viewBackground;
+        public LinearLayout viewForeGround;
+
 
         public RecordingViewHolder(@NonNull View itemView) {
             super(itemView);
             recordingName = itemView.findViewById(R.id.eachFileName);
             playButton = itemView.findViewById(R.id.playButton);
             pauseButton = itemView.findViewById(R.id.pauseButton);
-
+            viewForeGround = itemView.findViewById(R.id.recordingAvailableID);
+            viewBackground = itemView.findViewById(R.id.view_background);
 
 
         }
@@ -144,6 +152,13 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
                 togglePause(recordingViewHolder);
             }
         }
+
+
+    public void removeItem(int position) {
+        fileNames.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, fileNames.size());
+    }
 
     private void getPermission() {
         if (ContextCompat.checkSelfPermission(context,

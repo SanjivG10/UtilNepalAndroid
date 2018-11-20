@@ -107,7 +107,6 @@ public class EachMonthNumberOfDates {
         nepaliMap.put(2089, new int[] { 0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30 });
         nepaliMap.put(2090, new int[] { 0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30 });
 
-
         return nepaliMap;
     }
 
