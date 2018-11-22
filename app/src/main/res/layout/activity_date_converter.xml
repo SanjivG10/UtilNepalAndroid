@@ -7,187 +7,161 @@
     android:background="#FFF"
     tools:context=".DateConverter.DateConverterActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/todayDate"
-        android:gravity="center"
-        android:padding="20dp"
-        android:background="@drawable/date_border_layout"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:id="@+id/linearLayoutTopOne"
         >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/nepToEngConverterLayout"
+                >
+                    <Spinner
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/yearNepSpinner"
+                        android:textAlignment="center"
+                        android:layout_marginLeft="5dp"
+                        ></Spinner>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/todaysDateTextView"
-            android:textColor="#000"
-            android:layout_marginBottom="3dp"
-            android:textSize="20sp"
-            />
+                    <Spinner
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/monthNepSpinner"
+                        android:textAlignment="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+
+                        >
+                    </Spinner>
+
+                    <Spinner
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dayNepSpinner"
+                        android:textAlignment="center"
+
+                        >
+                    </Spinner>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Convert to English"
+                android:id="@+id/buttonConvertToEnglish"
+
+                android:layout_below="@+id/nepToEngConverterLayout"
+                android:layout_marginTop="20dp"
+                android:textColor="#FFF"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_eng_nep"
+                android:layout_gravity="center"
+                android:padding="10dp"
+
+                />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_below="@+id/googleAdsDateConverter"
+        android:layout_marginTop="20dp"
+        >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/engToNepConverter"
+                >
+                    <Spinner
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/yearEngSpinner"
+                        android:textAlignment="center"
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/linearLayoutTopOne"
-            android:layout_below="@id/todayDate"
-            >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:id="@+id/nepToEngConverterLayout"
-                    >
-                        <Spinner
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/yearNepSpinner"
-                            android:textAlignment="center"
-                            android:background="@drawable/spinner_layout"
-                            android:layout_marginLeft="5dp"
-                            ></Spinner>
+                        ></Spinner>
 
-                        <Spinner
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/monthNepSpinner"
-                            android:textAlignment="center"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:background="@drawable/spinner_layout"
+                    <Spinner
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/monthEngSpinner"
+                        android:textAlignment="center"
 
-                            >
-                        </Spinner>
+                        >
+                    </Spinner>
 
-                        <Spinner
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/dayNepSpinner"
-                            android:textAlignment="center"
-                            android:background="@drawable/spinner_layout"
+                    <Spinner
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dayEngSpinner"
+                        android:textAlignment="center"
+                        >
+                    </Spinner>
 
-                            >
-                        </Spinner>
+            </LinearLayout>
 
-                </LinearLayout>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Convert to English"
-                    android:id="@+id/buttonConvertToEnglish"
-
-                    android:layout_below="@+id/nepToEngConverterLayout"
-                    android:layout_marginTop="20dp"
-                    android:textColor="#FFF"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/button_eng_nep"
-                    android:layout_gravity="center"
-                    android:padding="10dp"
-
-                    />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_below="@+id/googleAdsDateConverter"
-            android:layout_marginTop="20dp"
-            >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:id="@+id/engToNepConverter"
-                    >
-                        <Spinner
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_marginLeft="5dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/yearEngSpinner"
-                            android:textAlignment="center"
-                            android:background="@drawable/spinner_layout"
-
-                            ></Spinner>
-
-                        <Spinner
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/monthEngSpinner"
-                            android:textAlignment="center"
-                            android:background="@drawable/spinner_layout"
-
-                            >
-                        </Spinner>
-
-                        <Spinner
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/dayEngSpinner"
-                            android:textAlignment="center"
-                            android:background="@drawable/spinner_layout"
-                            >
-                        </Spinner>
-
-                </LinearLayout>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Convert to Nepali"
-                    android:id="@+id/buttonConvertToNepali"
-                    android:layout_below="@+id/engToNepConverter"
-                    android:layout_marginTop="20dp"
-                    android:textColor="#FFF"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/button_eng_nep"
-                    android:padding="10dp"
-                    />
-        </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Convert to Nepali"
+                android:id="@+id/buttonConvertToNepali"
+                android:layout_below="@+id/engToNepConverter"
+                android:layout_marginTop="20dp"
+                android:textColor="#FFF"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_eng_nep"
+                android:padding="10dp"
+                />
+    </LinearLayout>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:fontFamily="sans-serif"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/dateConvertedTextView"
-            android:layout_marginBottom="30dp"
-            tools:text="YOUR DATE HERE"
-            android:textColor="#000"
-            />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:fontFamily="sans-serif"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/dateConvertedTextView"
+        android:layout_marginBottom="30dp"
+        tools:text="YOUR DATE HERE"
+        android:textColor="#000"
+        />
 
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linearLayoutTopOne"
-            android:layout_marginTop="20dp"
-            android:id="@+id/googleAdsDateConverter"
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayoutTopOne"
+        android:layout_marginTop="20dp"
+        android:id="@+id/googleAdsDateConverter"
 
-            >
+        >
 
 
-        </com.google.android.gms.ads.AdView>
+    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

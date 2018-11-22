@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.PixelFormat;
+import android.hardware.Camera;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -30,6 +32,7 @@ import com.google.android.gms.vision.text.TextRecognizer;
 import com.utilnepal.R;
 
 import java.io.IOException;
+import java.security.Policy;
 
 public class RechargeActivity extends AppCompatActivity {
 
@@ -118,12 +121,16 @@ public class RechargeActivity extends AppCompatActivity {
             return;
         }
 
+
+
         mCameraSource = new CameraSource.Builder(this, textRecognizer)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedPreviewSize(1280, 1024)
-                .setAutoFocusEnabled(true)
-                .setRequestedFps(2.0f)
+                .setRequestedFps(15.0f)
                 .build();
+
+
+        mSurfaceView.getHolder().setFormat(PixelFormat.RGBA_8888);
 
         mSurfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -184,8 +191,8 @@ public class RechargeActivity extends AppCompatActivity {
                             String myText = stringBuilder.toString();
 
                             String onlyDigits = getOnlyNumbers(myText);
-                            codeGenerated.setText(myText);
                             numberToDail = codeGenerated.getText().toString();
+                            codeGenerated.setText(onlyDigits);
                         }
                     });
                 }
