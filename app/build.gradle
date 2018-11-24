@@ -32,12 +32,11 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
 
     // for text detection api
-    implementation 'com.google.android.gms:play-services-vision:15.0.0'
+    implementation 'com.google.android.gms:play-services-vision:16.2.0'
     implementation 'com.google.android.gms:play-services-ads:15.0.0'
 
     implementation 'com.chibde:audiovisualizer:2.0.1'
-
-
+    implementation 'org.jetbrains:annotations-java5:15.0'
 
 
 }

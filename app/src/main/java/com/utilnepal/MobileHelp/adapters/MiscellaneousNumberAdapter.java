@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.utilnepal.MobileHelp.ActivitiesFragment.RechargeActivity;
+import com.utilnepal.MobileHelp.ActivitiesFragment.RechargeUtils.RechargeActivity;
 import com.utilnepal.MobileHelp.Files.MiscellaneousNumberFeatures;
 import com.utilnepal.R;
 
