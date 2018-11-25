@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_torch"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_lightbulb_outline_black_24dp"
+        android:title="Torch"/>
+
+    <item
+        android:id="@+id/navigation_keyboard"
+        android:icon="@drawable/ic_keyboard_black_24dp"
+        android:title="Albums"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/navigation_mobile_help"
+        android:icon="@drawable/ic_smartphone_black_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Artists"/>
+
+    <item
+        android:id="@+id/navigation_audioRecorder"
+        android:icon="@drawable/ic_audiotrack_black_24dp"
+        android:title="Songs"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/navigation_date_converter"
+        android:icon="@drawable/ic_date_range_black_24dp"
+        android:title="Albums"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/navigation_qr_code_scanner"
+        android:icon="@drawable/qrcode"
+        android:title="Artists"
+        app:showAsAction="ifRoom"/>
+
+</menu>

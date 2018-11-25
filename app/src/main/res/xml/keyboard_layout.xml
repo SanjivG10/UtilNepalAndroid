@@ -2,7 +2,7 @@
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:verticalGap="2px"
-    android:keyHeight="60dp">
+    android:keyHeight="65dp">
 
     <Row>
         <Key android:keyLabel="q" android:keyEdgeFlags="left" android:codes="113"    />
@@ -17,16 +17,16 @@
         <Key android:keyLabel="p" android:keyEdgeFlags="right" android:codes="112" />
     </Row>
 
-    <Row  android:keyWidth="11.11%p"  >
-        <Key android:keyLabel="a"  android:codes="97"  android:keyEdgeFlags="left"/>
-        <Key android:keyLabel="s" android:codes="115"/>
-        <Key android:keyLabel="d" android:codes="100"/>
-        <Key android:keyLabel="f" android:codes="102"/>
-        <Key android:keyLabel="g" android:codes="103"/>
-        <Key android:keyLabel="h" android:codes="104"/>
-        <Key android:keyLabel="j" android:codes="106"/>
-        <Key android:keyLabel="k" android:codes="107"/>
-        <Key android:keyLabel="l" android:codes="108" android:keyEdgeFlags="right" />
+    <Row  >
+        <Key android:horizontalGap="5%" android:keyLabel="a"  android:codes="97"  android:keyEdgeFlags="left"/>
+        <Key  android:keyLabel="s" android:codes="115"/>
+        <Key  android:keyLabel="d" android:codes="100"/>
+        <Key  android:keyLabel="f" android:codes="102"/>
+        <Key  android:keyLabel="g" android:codes="103"/>
+        <Key  android:keyLabel="h" android:codes="104"/>
+        <Key  android:keyLabel="j" android:codes="106"/>
+        <Key  android:keyLabel="k" android:codes="107"/>
+        <Key  android:keyLabel="l" android:codes="108" android:keyEdgeFlags="right" />
     </Row>
 
     <Row>

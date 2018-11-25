@@ -9,6 +9,8 @@ import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -59,10 +62,40 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//
+//        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+//                findViewById(R.id.bottom_navigation);
+//
+//        bottomNavigationView.setOnNavigationItemSelectedListener(
+//                new BottomNavigationView.OnNavigationItemSelectedListener() {
+//                    @Override
+//                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                        switch (item.getItemId()) {
+//                            case R.id.navigation_audioRecorder:
+//
+//                                break;
+//                            case R.id.navigation_torch:
+//
+//                                break;
+//                            case R.id.navigation_keyboard:
+//
+//                                break;
+//                            case R.id.navigation_mobile_help:
+//
+//                                break;
+//                            case R.id.navigation_date_converter:
+//
+//                                break;
+//                            case R.id.navigation_qr_code_scanner:
+//
+//                                break;
+//                        }
+//                        return false;
+//                    }
+//                });
 
         initialize();
-
+//
 //        MobileAds.initialize(this,"ca-app-pub-6365618181796618~5539213127");
 //        adView = findViewById(R.id.mainActivityAdView);
 //        AdRequest adRequest = new AdRequest.Builder().build();

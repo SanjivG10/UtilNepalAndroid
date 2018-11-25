@@ -6,7 +6,7 @@
     <color name="colorWhite"> #FFF</color>
     <color name="grey">#b2b2b2</color>
     <color name="keyboardColor1">#004380</color>
-
+    <color name="almostWhite">#FAFAFA</color>
     <color name="buttomColor">#6200EE</color>
     <color name="buttomColorUnpresed">#3700B3</color>
 
