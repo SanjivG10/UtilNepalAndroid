@@ -1,18 +1,75 @@
-package com.utilnepal.DateConverter.utils;
+package com.utilnepal.Utils;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.stream.IntStream;
 
 public class EachMonthNumberOfDates {
 
     private String hello;
 
     public static Map<Integer, int[]> nepaliMap = new HashMap<Integer, int[]>();
+    public static Map<Integer, Integer> nepaliMapEachYearSum = new HashMap<>();
+    public static int [] eachYearSumIntegerArray ;
 
-    public EachMonthNumberOfDates()
+
+    public static int [] daysCountFromStartingYear()
     {
+        Set<Integer> keys = getNepaliMap().keySet();
+        List<Integer> mainList = new ArrayList<Integer>(keys);
 
+        Collections.sort(mainList);
+        int[] keysArray = new int[keys.size()];
+        int index = 0;
+
+        for(Integer element : mainList)  {
+            keysArray[index++] = element.intValue();
+        }
+
+
+        int [] sumOfEachYearPassing = new int[keysArray.length];
+        int [] sumOfEachYearToCheck = new int[keysArray.length];
+
+//        sumOfEachYearPassing[0] = 102;
+
+        for (int i=0; i <keysArray.length; i++)
+        {
+            sumOfEachYearPassing[i] =  getTheSum(getNepaliMap().get(keysArray[i]));
+        }
+
+        int sumToCheck = 102;
+        sumOfEachYearPassing[0] = 0;
+        for(int i=0; i <sumOfEachYearPassing.length; i++)
+        {
+            sumOfEachYearToCheck[i] = sumToCheck+sumOfEachYearPassing[i];
+            sumToCheck = sumOfEachYearToCheck[i];
+            nepaliMapEachYearSum.put(keysArray[i],sumOfEachYearToCheck[i]);
+            eachYearSumIntegerArray[i] = sumOfEachYearToCheck[i];
+            Log.e(" EACH YEAR SUM", keysArray[i] + " => " + String.valueOf(sumOfEachYearToCheck[i]));
+        }
+
+        return sumOfEachYearToCheck;
     }
+
+    private static int getTheSum(int[] everyYear)
+    {
+        int sum = 0;
+        for( int i : everyYear) {
+            sum += i;
+        }
+        return  sum;
+    }
+
+
 
     public static Map<Integer, int[]> getNepaliMap() {
         nepaliMap.put(2000, new int[] { 0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31 });
@@ -106,8 +163,11 @@ public class EachMonthNumberOfDates {
         nepaliMap.put(2088, new int[] { 0, 30, 31, 32, 32, 30, 31, 30, 30, 29, 30, 30, 30 });
         nepaliMap.put(2089, new int[] { 0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30 });
         nepaliMap.put(2090, new int[] { 0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30 });
+        eachYearSumIntegerArray = new int[nepaliMap.size()];
+
 
         return nepaliMap;
     }
+
 
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E9E9E9"
+    android:background="@color/almostWhite"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -42,8 +42,8 @@
                 >
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_lightbulb_outline_black_24dp"
                     android:layout_gravity="center_horizontal"
                     android:id="@+id/torchImageView"
@@ -79,8 +79,8 @@
                 >
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_keyboard_black_24dp"
                     android:layout_gravity="center_horizontal"
                     />
@@ -124,8 +124,8 @@
                 >
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_smartphone_black_24dp"
                     android:layout_gravity="center_horizontal"
                     />
@@ -162,8 +162,8 @@
                 >
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_audiotrack_black_24dp"
                     android:layout_gravity="center_horizontal"
                     />
@@ -209,8 +209,8 @@
                 >
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_date_range_black_24dp"
                     android:layout_gravity="center_horizontal"
                     />
@@ -245,8 +245,8 @@
                 >
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/qrcode"
                     android:layout_gravity="center_horizontal"
                     />

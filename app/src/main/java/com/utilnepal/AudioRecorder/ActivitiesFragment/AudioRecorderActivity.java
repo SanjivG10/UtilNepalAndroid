@@ -1,6 +1,7 @@
 package com.utilnepal.AudioRecorder.ActivitiesFragment;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -48,6 +49,16 @@ public class AudioRecorderActivity extends AppCompatActivity {
         mViewPager.setAdapter(mAudioRecorderAdapter);
         tabLayoutHomePage = findViewById(R.id.tabLayoutHomePage);
         tabLayoutHomePage.setupWithViewPager(mViewPager);
+    }
+
+    @Override public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    @Override public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
 }

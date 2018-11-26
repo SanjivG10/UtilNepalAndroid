@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chibde.visualizer.LineVisualizer;
 import com.utilnepal.AudioRecorder.Files.FileNames;
 import com.utilnepal.AudioRecorder.adapters.RecordingAdapter;
 import com.utilnepal.R;

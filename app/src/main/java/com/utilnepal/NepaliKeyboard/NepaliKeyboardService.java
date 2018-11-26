@@ -1,22 +1,17 @@
 package com.utilnepal.NepaliKeyboard;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.AudioManager;
-import android.text.Layout;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 
-import com.utilnepal.NepaliKeyboard.ActivitiesFragments.CandidatesView;
 import com.utilnepal.R;
 
 public class NepaliKeyboardService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
@@ -25,7 +20,6 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
     private KeyboardView kv;
     private Keyboard keyboard;
     private EditorInfo sEditorInfo;
-    private CandidatesView candidatesView;
 
 
     //forCapsLock
@@ -67,6 +61,7 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
     @Override
     public void onStartInputView(EditorInfo info, boolean restarting) {
         sEditorInfo = info;
+
         super.onStartInputView(info, restarting);
     }
 
@@ -199,11 +194,4 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
 
     }
 
-
-//    @Override
-//    public View onCreateCandidatesView() {
-//        candidatesView = new CandidatesView(getApplicationContext());
-//        candidatesView.setService((NepaliKeyboardService) getApplicationContext());
-//        return candidatesView;
-//    }
 }
