@@ -5,12 +5,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.utilnepal.AudioRecorder.Files.FileNames;
-import com.utilnepal.MobileHelp.adapters.EmergencyNumberAdapter;
 import com.utilnepal.R;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.RecordingViewHolder> {

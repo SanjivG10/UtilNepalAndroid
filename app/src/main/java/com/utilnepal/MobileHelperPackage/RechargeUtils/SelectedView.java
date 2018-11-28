@@ -1,17 +1,13 @@
-package com.utilnepal.MobileHelp.ActivitiesFragment.RechargeUtils;
+package com.utilnepal.MobileHelperPackage.RechargeUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.View;
 
 public class SelectedView extends View {

@@ -20,13 +20,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdView;
 import com.utilnepal.AudioRecorder.ActivitiesFragment.AudioRecorderActivity;
-import com.utilnepal.MobileHelp.ActivitiesFragment.MobileActivity;
+import com.utilnepal.MobileHelperPackage.MobileHelperActivity;
 import com.utilnepal.NepaliKeyboard.ActivitiesFragments.KeyboardActivity;
 import com.utilnepal.QRCodeScanner.QRCodeActivity;
 import com.utilnepal.Utils.EachMonthNumberOfDates;
@@ -50,13 +51,12 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardView torchCardView;
-    private CardView keyboardCardView;
-    private CardView audioRecordCardView;
-    private CardView mobileHelpCardView;
-    private CardView dateconverterCardView;
-    private CardView qrCodeScannerCardView;
-    private ImageView torchImageView;
+    private ImageView torchCardView;
+    private ImageView keyboardCardView;
+    private ImageView audioRecordCardView;
+    private ImageView mobileHelpCardView;
+    private ImageView dateconverterCardView;
+    private ImageView qrCodeScannerCardView;
 
     private Boolean is_flash_on;
     private String checkIfFlashOnString;
@@ -123,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> monthEngToNepAdapter;
     private ArrayAdapter<String> dayEngToNepAdapter;
 
+    private ProgressBar progressbarForConverting;
+
     private  Calendar currentEngDate;
     private Calendar baseEngDate;
 
@@ -143,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
 //        adView = findViewById(R.id.mainActivityAdView);
 //        AdRequest adRequest = new AdRequest.Builder().build();
 //        adView.loadAd(adRequest);
-
 
         hasFlash= getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
         is_flash_on = false;
@@ -168,13 +169,12 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, 50);
         }
 
-        torchCardView = findViewById(R.id.torchCardView);
-        keyboardCardView = findViewById(R.id.keyboardCardView);
-        audioRecordCardView = findViewById(R.id.audioRecordCardView);
-        mobileHelpCardView = findViewById(R.id.mobileHelpCardView);
-        dateconverterCardView = findViewById(R.id.dateconverterCardView);
-        qrCodeScannerCardView = findViewById(R.id.qrCodeScannerCardView);
-        torchImageView = findViewById(R.id.torchImageView);
+        torchCardView = findViewById(R.id.torchImageView);
+        keyboardCardView = findViewById(R.id.keyboardImageView);
+        audioRecordCardView = findViewById(R.id.audioRecorderImageView);
+        mobileHelpCardView = findViewById(R.id.mobileImageView);
+        dateconverterCardView = findViewById(R.id.date_converterImageView);
+        qrCodeScannerCardView = findViewById(R.id.qrcodeImageView);
 
         torchCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
         mobileHelpCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MobileActivity.class);
+                Intent intent = new Intent(MainActivity.this,MobileHelperActivity.class);
                 startActivity(intent);
             }
         });
@@ -306,6 +306,9 @@ public class MainActivity extends AppCompatActivity {
         yearNepSpinner = alertDialog.findViewById(R.id.yearNepSpinner);
         monthNepSpinner = alertDialog.findViewById(R.id.monthNepSpinner);
         dayNepSpinner = alertDialog.findViewById(R.id.dayNepSpinner);
+        progressbarForConverting = alertDialog.findViewById(R.id.progressbarForConverting);
+        progressbarForConverting.setVisibility(View.GONE);
+
 
 
         yearEngSpinner = alertDialog.findViewById(R.id.yearEngSpinner);
@@ -326,14 +329,14 @@ public class MainActivity extends AppCompatActivity {
 
         dayEngToNepAdapter = new ArrayAdapter<String>(this,R.layout.each_spinner_item, getDaysForEnglish(daysInMonth));
 
-        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        yearAdapter.setDropDownViewResource(R.layout.each_spinner_item);
+        monthAdapter.setDropDownViewResource(R.layout.each_spinner_item);
+        dayAdapter.setDropDownViewResource(R.layout.each_spinner_item);
 
 
-        yearEngToNepAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        monthEngToNepAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dayEngToNepAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        yearEngToNepAdapter.setDropDownViewResource(R.layout.each_spinner_item);
+        monthEngToNepAdapter.setDropDownViewResource(R.layout.each_spinner_item);
+        dayEngToNepAdapter.setDropDownViewResource(R.layout.each_spinner_item);
 
 
         yearEngSpinner.setAdapter(yearEngToNepAdapter);
@@ -491,9 +494,27 @@ public class MainActivity extends AppCompatActivity {
         convertToEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(progressbarForConverting.getVisibility()== View.GONE)
+                {
+                    progressbarForConverting.setVisibility(View.VISIBLE);
+                    convertToEnglish.setEnabled(false);
+                    convertToNepali.setEnabled(false);
+
+                }
+
+
+
                 long daysCount = getTotalDaysCount();
                 String date = convertToEnglish(daysCount);
                 dateConvertedTextView.setText(date);
+
+                if(progressbarForConverting.getVisibility()== View.VISIBLE)
+                {
+                    progressbarForConverting.setVisibility(View.GONE);
+                    convertToEnglish.setEnabled(true);
+                    convertToNepali.setEnabled(true);
+                }
 
             }
         });
@@ -501,9 +522,24 @@ public class MainActivity extends AppCompatActivity {
         convertToNepali.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Log.e("GET PROGRESSBAR", String.valueOf(progressbarForConverting.getVisibility()));
+                if(progressbarForConverting.getVisibility()== View.GONE)
+                {
+                    progressbarForConverting.setVisibility(View.VISIBLE);
+                    convertToEnglish.setEnabled(false);
+                    convertToNepali.setEnabled(false);
+                }
                 long daysCount = getTotalDaysCountEnglish();
                 String date = convertToNepaliFunction(daysCount);
                 dateConvertedTextView.setText(date);
+
+                if(progressbarForConverting.getVisibility()== View.VISIBLE)
+                {
+                    progressbarForConverting.setVisibility(View.GONE);
+                    convertToEnglish.setEnabled(true);
+                    convertToNepali.setEnabled(true);
+                }
             }
 
         });
@@ -586,6 +622,8 @@ public class MainActivity extends AppCompatActivity {
         int nepMonth = startingNepMonthForSelection;
         int nepDay = startingNepDayForSelection;
 
+
+
         while (totalEngDaysCount != 0) {
 
             int daysInIthMonth = EachMonthNumberOfDates.getNepaliMap().get(nepYear)[nepMonth];
@@ -608,6 +646,7 @@ public class MainActivity extends AppCompatActivity {
         String [] months = getMonthArray();
         String nepaliMonth = months[nepMonth-1];
         String nepaliDay = convertEngYearToNepWithTextReplacement(String.valueOf(nepDay));
+
 
         return nepaliYear +"  "+nepaliMonth+" "+ nepaliDay ;
 
@@ -853,7 +892,7 @@ public class MainActivity extends AppCompatActivity {
             camera.setParameters(p);
             camera.startPreview();
             is_flash_on = true;
-            torchImageView.setImageResource(R.drawable.ic_lightbulb_outline_yellow_64dp);
+            torchCardView.setImageResource(R.drawable.ic_lightbulb_outline_yellow_64dp);
 
             // changing button/switch image
         }
@@ -873,7 +912,7 @@ public class MainActivity extends AppCompatActivity {
             camera.stopPreview();
             is_flash_on = false;
 
-            torchImageView.setImageResource(R.drawable.ic_lightbulb_outline_black_24dp);
+            torchCardView.setImageResource(R.drawable.ic_lightbulb_outline_black_24dp);
         }
     }
 

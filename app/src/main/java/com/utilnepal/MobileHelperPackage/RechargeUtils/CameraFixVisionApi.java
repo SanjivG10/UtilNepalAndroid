@@ -1,4 +1,4 @@
-package com.utilnepal.MobileHelp.ActivitiesFragment.RechargeUtils;
+package com.utilnepal.MobileHelperPackage.RechargeUtils;
 
 import android.hardware.Camera;
 import android.support.annotation.NonNull;

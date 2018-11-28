@@ -10,5 +10,14 @@
     <color name="buttomColor">#6200EE</color>
     <color name="buttomColorUnpresed">#3700B3</color>
 
+    <!--color for card view-->
+    <color name="color1">#b92b27</color>
+    <color name="color2">#1565C0</color>
+    <color name="color3">#FF0099</color>
+    <color name="color4">#f5af19</color>
+    <color name="color5">#009FFF</color>
+    <color name="color6">#FF4B2B</color>
+
+
 
 </resources>

@@ -1,28 +1,18 @@
-package com.utilnepal.MobileHelp.ActivitiesFragment.RechargeUtils;
+package com.utilnepal.MobileHelperPackage.RechargeUtils;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.net.Uri;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
@@ -39,7 +29,6 @@ import com.google.android.gms.vision.text.TextRecognizer;
 import com.utilnepal.R;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,7 +111,6 @@ public class RechargeActivity extends AppCompatActivity {
                     .setRequestedFps(15.0f)
                     .setAutoFocusEnabled(true)
                     .build();
-
 
 
             oldSurfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {

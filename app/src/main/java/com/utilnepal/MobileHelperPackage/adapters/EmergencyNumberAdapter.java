@@ -1,4 +1,4 @@
-package com.utilnepal.MobileHelp.adapters;
+package com.utilnepal.MobileHelperPackage.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.utilnepal.MobileHelp.Files.EmergencyNumberFeatures;
-import com.utilnepal.MobileHelp.Files.MiscellaneousNumberFeatures;
+import com.utilnepal.MobileHelperPackage.data.EmergencyNumberFeatures;
 import com.utilnepal.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

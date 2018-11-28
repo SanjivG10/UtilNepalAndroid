@@ -2,13 +2,13 @@
     <string name="app_name">UtilNepal</string>
     <string name="nepali_keyboard"> Nepali Keyboard</string>
     <string name="subtype_en_NP">Nepali (np)</string>
-    <string name="balance"> पैसा चेक गर्नुहोस   </string>
+    <string name="balance"> पैसा चेक </string>
 
     <string name="add_balance"> ब्यालेन्स हाल्नुहोस   </string>
     <string name="add_balance_info">सिममा ब्यालेन्स (पैसा) हाल्नुहोस</string>
 
     <string name="balance_info"> सिममा कती पैसा छ चेक गर्नु होस  </string>
-    <string name="mobile_number"> मोबाईल नम्बर चेक </string>
+    <string name="mobile_number"> नम्बर चेक </string>
     <string name="mobile_number_info"> आफ्नो मोबाईल नम्बर चेक गर्नुहोस   </string>
     <string name="data_pack"> डाटा प्याक  </string>
     <string name="data_pack_info"> डाटा प्याक लिनुहोस  </string>
@@ -17,6 +17,7 @@
     <string name="ncell">एन्सेल </string>
     <string name="ntc">एन्टीसी  </string>
     <string name="emergency">Emergency</string>
+    <string name="other_number">अन्य नम्बर</string>
 
     <!--  for emergency Numbers -->
     <string name="policeControl">पुलिस कन्ट्रोल </string>

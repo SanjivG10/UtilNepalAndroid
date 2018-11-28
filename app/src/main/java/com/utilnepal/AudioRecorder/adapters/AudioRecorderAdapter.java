@@ -7,8 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.utilnepal.AudioRecorder.ActivitiesFragment.RecorderFragment;
 import com.utilnepal.AudioRecorder.ActivitiesFragment.RecordingFragment;
-import com.utilnepal.MobileHelp.ActivitiesFragment.EmergencyFragment;
-import com.utilnepal.MobileHelp.ActivitiesFragment.MiscellaneousFragment;
 
 import java.util.List;
 
@@ -19,7 +17,6 @@ public class AudioRecorderAdapter extends FragmentPagerAdapter {
     public AudioRecorderAdapter(FragmentManager fm) {
         super(fm);
     }
-
 
     @Override
     public Fragment getItem(int i) {

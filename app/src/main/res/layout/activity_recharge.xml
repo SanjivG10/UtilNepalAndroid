@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MobileHelp.ActivitiesFragment.RechargeUtils.RechargeActivity">
+    tools:context=".MobileHelperPackage.RechargeUtils.RechargeActivity">
 
 
 
@@ -24,7 +24,7 @@
                 android:layout_height="200dp"
                 />
 
-          <com.utilnepal.MobileHelp.ActivitiesFragment.RechargeUtils.SelectedView
+          <com.utilnepal.MobileHelperPackage.RechargeUtils.SelectedView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content" />
 
