@@ -104,9 +104,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
         private TextView recordingName;
         private ImageView playButton;
         private ImageView pauseButton;
-        public ImageView thumbnail;
-        public RelativeLayout viewBackground;
-        public LinearLayout viewForeGround;
+
 
 
         public RecordingViewHolder(@NonNull View itemView) {
@@ -114,9 +112,6 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
             recordingName = itemView.findViewById(R.id.eachFileName);
             playButton = itemView.findViewById(R.id.playButton);
             pauseButton = itemView.findViewById(R.id.pauseButton);
-            viewForeGround = itemView.findViewById(R.id.recordingAvailableID);
-            viewBackground = itemView.findViewById(R.id.view_background);
-
 
         }
     }

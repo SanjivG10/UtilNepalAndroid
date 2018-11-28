@@ -11,37 +11,59 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#6F5B74"
         tools:context=".AudioRecorder.ActivitiesFragment.AudioRecorderActivity">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_play_circle_outline_black_24dp"
-            android:layout_centerInParent="true"
-            android:id="@+id/playButton"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_stop_black_24dp"
-            android:layout_centerInParent="true"
-            android:id="@+id/stopButton"
-            android:visibility="gone"
-        />
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/microphone"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="40dp"
+                android:id="@+id/microPhoneIcon"
+                />
+
+            <Chronometer
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:id="@+id/timeForRecord"
+                android:fontFamily="serif-monospace"
+                android:textColor="#FFF"
+
+                android:layout_marginTop="10dp"
+                />
 
 
-    <Chronometer
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/timeForRecord"
-        android:fontFamily="serif-monospace"
-        android:textColor="#000"
-        android:layout_below="@+id/playButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-    />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circular_recording_button"
+                android:layout_marginTop="40dp"
+                android:id="@+id/playButton"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/stop_button_recorder"
+                android:layout_marginTop="40dp"
+                android:id="@+id/stopButton"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+
+
+
 
 
 
