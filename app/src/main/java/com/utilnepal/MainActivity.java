@@ -500,6 +500,7 @@ public class MainActivity extends AppCompatActivity {
                     progressbarForConverting.setVisibility(View.VISIBLE);
                     convertToEnglish.setEnabled(false);
                     convertToNepali.setEnabled(false);
+                    dateConvertedTextView.setText(" CONVERTING ");
 
                 }
 
@@ -529,6 +530,7 @@ public class MainActivity extends AppCompatActivity {
                     progressbarForConverting.setVisibility(View.VISIBLE);
                     convertToEnglish.setEnabled(false);
                     convertToNepali.setEnabled(false);
+                    dateConvertedTextView.setText(" CONVERTING ");
                 }
                 long daysCount = getTotalDaysCountEnglish();
                 String date = convertToNepaliFunction(daysCount);

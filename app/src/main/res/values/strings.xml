@@ -4,6 +4,8 @@
     <string name="subtype_en_NP">Nepali (np)</string>
     <string name="balance"> पैसा चेक </string>
 
+    <string name="sim_selection">कुन चाँही सिम सेलेक्ट भएको छ हेर्नुहोस्</string>
+
     <string name="add_balance"> ब्यालेन्स हाल्नुहोस   </string>
     <string name="add_balance_info">सिममा ब्यालेन्स (पैसा) हाल्नुहोस</string>
 

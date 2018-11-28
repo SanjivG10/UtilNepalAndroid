@@ -4,13 +4,15 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="2dp"
-    android:background="@color/color4"
+    android:background="#FFF"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recordingAvailableID"
+        android:background="#6F5B74"
+        android:layout_marginBottom="2dp"
         >
 
         <ImageView

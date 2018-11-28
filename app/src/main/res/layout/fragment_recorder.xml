@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#6F5B74"
-        tools:context=".AudioRecorder.ActivitiesFragment.AudioRecorderActivity">
+        tools:context=".AudioRecord.ActivitiesFragment.AudioRecorderActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,27 +37,36 @@
                 android:id="@+id/timeForRecord"
                 android:fontFamily="serif-monospace"
                 android:textColor="#FFF"
-
                 android:layout_marginTop="10dp"
                 />
 
-
-            <ImageView
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/circular_recording_button"
-                android:layout_marginTop="40dp"
-                android:id="@+id/playButton"
-                />
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/stop_button_recorder"
-                android:layout_marginTop="40dp"
-                android:id="@+id/stopButton"
-                android:visibility="gone"
-                />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/circular_recording_button"
+                    android:layout_marginTop="40dp"
+                    android:id="@+id/playButton"
+                    />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/stop_button_recorder"
+                    android:layout_marginTop="40dp"
+                    android:id="@+id/stopButton"
+                    android:visibility="gone"
+                    />
+
+
+
+            </RelativeLayout>
+
+
 
         </LinearLayout>
 
