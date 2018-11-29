@@ -1,8 +1,7 @@
-package com.utilnepal.MobileHelperPackage.data;
+package com.utilnepal.MobileHelper.data;
 
 import android.content.Context;
 
-import com.utilnepal.MobileHelperPackage.data.EmergencyNumberFeatures;
 import com.utilnepal.R;
 
 import java.util.ArrayList;

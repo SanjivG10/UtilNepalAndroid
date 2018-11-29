@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +26,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdView;
 import com.utilnepal.AudioRecorder.ActivitiesFragment.AudioRecorderActivity;
-import com.utilnepal.MobileHelperPackage.MobileHelperActivity;
+import com.utilnepal.MobileHelper.MobileHelperActivity;
 import com.utilnepal.NepaliKeyboard.ActivitiesFragments.KeyboardActivity;
 import com.utilnepal.QRCodeScanner.QRCodeActivity;
 import com.utilnepal.Utils.EachMonthNumberOfDates;
@@ -303,11 +302,15 @@ public class MainActivity extends AppCompatActivity {
         dateConvertedTextView = alertDialog.findViewById(R.id.dateConvertedTextView);
 
 
+        //progresbar
+        progressbarForConverting = alertDialog.findViewById(R.id.progressbarForConverting);
+        progressbarForConverting.setVisibility(View.GONE);
+
+        //spinner
+
         yearNepSpinner = alertDialog.findViewById(R.id.yearNepSpinner);
         monthNepSpinner = alertDialog.findViewById(R.id.monthNepSpinner);
         dayNepSpinner = alertDialog.findViewById(R.id.dayNepSpinner);
-        progressbarForConverting = alertDialog.findViewById(R.id.progressbarForConverting);
-        progressbarForConverting.setVisibility(View.GONE);
 
 
 
@@ -359,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
                 yearSelectedOnClick = Integer.parseInt(yearSelectedOnClickString);
                 noOfDaysOnClick= EachMonthNumberOfDates.getNepaliMap().get(yearSelectedOnClick)[monthPositionOnClick];
                 dayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.each_spinner_item, getDayArray(noOfDaysOnClick));
-                dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                dayAdapter.setDropDownViewResource(R.layout.each_spinner_item);
                 dayNepSpinner.setAdapter(dayAdapter);
 
             }
@@ -378,8 +381,9 @@ public class MainActivity extends AppCompatActivity {
 
                 noOfDaysOnClick= EachMonthNumberOfDates.getNepaliMap().get(yearSelectedOnClick)[monthPositionOnClick];
                 dayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.each_spinner_item, getDayArray(noOfDaysOnClick));
-                dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                dayAdapter.setDropDownViewResource(R.layout.each_spinner_item);
                 dayNepSpinner.setAdapter(dayAdapter);
+
 
 
 
@@ -431,7 +435,7 @@ public class MainActivity extends AppCompatActivity {
                 int daysInMonth = mycal.getActualMaximum(Calendar.DAY_OF_MONTH); // 28
 
                 dayEngToNepAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.each_spinner_item, getDaysForEnglish(daysInMonth));
-                dayEngToNepAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                dayAdapter.setDropDownViewResource(R.layout.each_spinner_item);
                 dayEngSpinner.setAdapter(dayEngToNepAdapter);
 
 
@@ -470,7 +474,7 @@ public class MainActivity extends AppCompatActivity {
                 int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
                 dayEngToNepAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.each_spinner_item, getDaysForEnglish(days));
-                dayEngToNepAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                dayAdapter.setDropDownViewResource(R.layout.each_spinner_item);
                 dayEngSpinner.setAdapter(dayEngToNepAdapter);
             }
 

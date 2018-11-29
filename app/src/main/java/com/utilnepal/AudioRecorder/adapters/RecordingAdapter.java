@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.utilnepal.AudioRecorder.Files.FileNames;
 import com.utilnepal.R;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -58,7 +60,6 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
                         String main_path = context.getFilesDir().getPath();
                         String appended_path = main_path+"/recordings";
                         String newSource =  appended_path+"/"+source;
-                        Log.e("Source File", newSource + "position =>");
                         playFile(newSource,recordingViewHolder);
                     }
                 });
@@ -69,6 +70,50 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
                         pauseFile(recordingViewHolder);
                     }
                 });
+
+                recordingViewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String main_path = context.getFilesDir().getPath();
+                        String appended_path = main_path+"/recordings";
+                        String newSource =  appended_path+"/"+source;
+                        deleteFile(newSource, position);
+                    }
+                });
+
+                recordingViewHolder.recordingAvailableID.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(recordingViewHolder.deleteButton.getVisibility()==View.GONE)
+                        {
+                            recordingViewHolder.deleteButton.setVisibility(View.VISIBLE);
+                        }
+                        else if(recordingViewHolder.deleteButton.getVisibility()==View.VISIBLE)
+                        {
+                            recordingViewHolder.deleteButton.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
+    }
+
+    private void deleteFile(String source, int position) {
+        File f = new File(source);
+        Log.e("FILE PATH", f.getAbsolutePath() + " haha");
+        if(f.exists())
+        {
+            Log.e("File exists", "file exists");
+            if(f.delete())
+            {
+                fileNames.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, fileNames.size());
+            }
+            else
+            {
+                Toast.makeText(context, "Sorry, File coulnd't be deleted",Toast.LENGTH_SHORT).show();
+            }
+        }
 
     }
 
@@ -104,6 +149,8 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
         private TextView recordingName;
         private ImageView playButton;
         private ImageView pauseButton;
+        private Button deleteButton;
+        private LinearLayout recordingAvailableID;
 
 
 
@@ -112,7 +159,8 @@ public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.Reco
             recordingName = itemView.findViewById(R.id.eachFileName);
             playButton = itemView.findViewById(R.id.playButton);
             pauseButton = itemView.findViewById(R.id.pauseButton);
-
+            deleteButton = itemView.findViewById(R.id.deleteButton);
+            recordingAvailableID = itemView.findViewById(R.id.recordingAvailableID);
         }
     }
 

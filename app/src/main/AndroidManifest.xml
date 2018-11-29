@@ -62,11 +62,11 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".MobileHelperPackage.RechargeUtils.RechargeActivity"
+            android:name=".MobileHelper.RechargeUtils.RechargeActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".MobileHelperPackage.MobileHelperActivity" />
-        <activity android:name=".MobileHelperPackage.MiscellaneousActivity"></activity>
+        <activity android:name=".MobileHelper.MobileHelperActivity" />
+        <activity android:name=".MobileHelper.MiscellaneousActivity"></activity>
     </application>
 
 </manifest>

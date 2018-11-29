@@ -1,4 +1,4 @@
-package com.utilnepal.MobileHelperPackage;
+package com.utilnepal.MobileHelper;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.utilnepal.MobileHelperPackage.adapters.EmergencyNumberAdapter;
-import com.utilnepal.MobileHelperPackage.data.EmergencyNumberFeatures;
-import com.utilnepal.MobileHelperPackage.data.EmergencyNumbersGenerator;
+import com.utilnepal.MobileHelper.adapters.EmergencyNumberAdapter;
+import com.utilnepal.MobileHelper.data.EmergencyNumberFeatures;
+import com.utilnepal.MobileHelper.data.EmergencyNumbersGenerator;
 import com.utilnepal.R;
 
 import java.util.ArrayList;

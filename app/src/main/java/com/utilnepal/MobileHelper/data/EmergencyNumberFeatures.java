@@ -1,4 +1,4 @@
-package com.utilnepal.MobileHelperPackage.data;
+package com.utilnepal.MobileHelper.data;
 
 public class EmergencyNumberFeatures {
 

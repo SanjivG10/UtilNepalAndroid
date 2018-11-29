@@ -1,4 +1,4 @@
-package com.utilnepal.MobileHelperPackage.RechargeUtils;
+package com.utilnepal.MobileHelper.RechargeUtils;
 
 import android.content.Context;
 import android.content.res.Resources;

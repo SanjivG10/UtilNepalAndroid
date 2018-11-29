@@ -1,4 +1,4 @@
-package com.utilnepal.MobileHelperPackage;
+package com.utilnepal.MobileHelper;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import com.utilnepal.MobileHelperPackage.RechargeUtils.RechargeActivity;
-import com.utilnepal.MobileHelperPackage.data.SimNumbers;
+import com.utilnepal.MobileHelper.RechargeUtils.RechargeActivity;
+import com.utilnepal.MobileHelper.data.SimNumbers;
 import com.utilnepal.R;
 
 public class MobileHelperActivity extends AppCompatActivity {

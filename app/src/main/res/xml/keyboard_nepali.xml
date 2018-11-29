@@ -31,7 +31,7 @@
         <Key android:codes="0x092C" android:keyLabel="ब" android:keyEdgeFlags="left"/>
         <Key android:codes="0x092B" android:keyLabel="फ"/>
         <Key android:codes="0x092D" android:keyLabel="भ"/>
-        <Key android:codes="0x092A" android:keyLabel="प"/>
+        <Key android:codes="0x0923" android:keyLabel="ण"/>
         <Key android:codes="0x0928" android:keyLabel="न"/>
         <Key android:codes="0x092E" android:keyLabel="म"/>
         <Key android:codes="0x091D" android:keyLabel="झ"/>

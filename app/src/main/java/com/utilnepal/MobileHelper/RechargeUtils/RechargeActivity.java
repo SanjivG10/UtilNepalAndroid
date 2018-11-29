@@ -1,4 +1,4 @@
-package com.utilnepal.MobileHelperPackage.RechargeUtils;
+package com.utilnepal.MobileHelper.RechargeUtils;
 
 import android.Manifest;
 import android.content.Intent;
