@@ -1,16 +1,21 @@
 package com.utilnepal;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +29,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.utilnepal.AudioRecorder.ActivitiesFragment.AudioRecorderActivity;
 import com.utilnepal.MobileHelper.MobileHelperActivity;
 import com.utilnepal.NepaliKeyboard.ActivitiesFragments.KeyboardActivity;
@@ -50,21 +57,25 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView torchCardView;
-    private ImageView keyboardCardView;
-    private ImageView audioRecordCardView;
-    private ImageView mobileHelpCardView;
-    private ImageView dateconverterCardView;
-    private ImageView qrCodeScannerCardView;
+    private CardView torchCardView;
+    private CardView keyboardCardView;
+    private CardView audioRecordCardView;
+    private CardView mobileHelpCardView;
+    private CardView dateconverterCardView;
+    private CardView qrCodeScannerCardView;
+
+    private ImageView torchImageView;
 
     private Boolean is_flash_on;
-    private String checkIfFlashOnString;
     private Boolean hasFlash;
-    private android.hardware.Camera camera;
-    private android.hardware.Camera.Parameters p;
+    private Camera.Parameters p;
     private AdView adView;
-    private ViewPager viewPagerForDate;
     private static final int CAMERA_REQUEST = 50;
+
+
+    private Camera mCamera;
+    private CameraManager camManager;
+    private Context context;
 
 
     // for date Converter
@@ -139,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         initialize();
-//
-//        MobileAds.initialize(this,"ca-app-pub-6365618181796618~5539213127");
+
+//        MobileAds.initialize(this,AdUnits.FAKE_APP_ID);
 //        adView = findViewById(R.id.mainActivityAdView);
 //        AdRequest adRequest = new AdRequest.Builder().build();
 //        adView.loadAd(adRequest);
@@ -168,12 +179,14 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, 50);
         }
 
-        torchCardView = findViewById(R.id.torchImageView);
-        keyboardCardView = findViewById(R.id.keyboardImageView);
-        audioRecordCardView = findViewById(R.id.audioRecorderImageView);
-        mobileHelpCardView = findViewById(R.id.mobileImageView);
-        dateconverterCardView = findViewById(R.id.date_converterImageView);
-        qrCodeScannerCardView = findViewById(R.id.qrcodeImageView);
+        torchCardView = findViewById(R.id.torchCardView);
+        keyboardCardView = findViewById(R.id.keyboardCardView);
+        audioRecordCardView = findViewById(R.id.audioRecordCardView);
+        mobileHelpCardView = findViewById(R.id.mobileHelpCardView);
+        dateconverterCardView = findViewById(R.id.dateconverterCardView);
+        qrCodeScannerCardView = findViewById(R.id.qrCodeScannerCardView);
+
+        torchImageView = findViewById(R.id.torchImageView);
 
         torchCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,9 +195,9 @@ public class MainActivity extends AppCompatActivity {
                 if(hasFlash)
                 {
                     if (is_flash_on) {
-                    turnOffFlash();
+                    turnFlashlightOff();
                     } else {
-                        turnOnFlash();
+                        turnFlashlightOn();
                     }
                 }
 
@@ -867,18 +880,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-
     private void getCamera() {
-        if (camera == null) {
+        if (mCamera == null) {
             try {
-                camera = Camera.open();
-                p = camera.getParameters();
+                mCamera = Camera.open();
+                p = mCamera.getParameters();
             } catch (RuntimeException e) {
                 Log.e("Camera Null", "Camera is null");
             }
@@ -886,43 +892,68 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void turnFlashlightOff() {
 
-    private void turnOnFlash() {
-        if (!is_flash_on) {
-            if (camera == null || p == null) {
-                return;
-            }
-
-            p = camera.getParameters();
-            p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-            camera.setParameters(p);
-            camera.startPreview();
-            is_flash_on = true;
-            torchCardView.setImageResource(R.drawable.ic_lightbulb_outline_yellow_64dp);
-
-            // changing button/switch image
-        }
-
-    }
-
-
-    private void turnOffFlash() {
         if (is_flash_on) {
-            if (camera == null || p == null) {
+            if (mCamera == null || p == null) {
                 return;
             }
 
-            p = camera.getParameters();
-            p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-            camera.setParameters(p);
-            camera.stopPreview();
-            is_flash_on = false;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                try {
+                    String cameraId;
+                    camManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
+                    if (camManager != null) {
+                        cameraId = camManager.getCameraIdList()[0];
+                        camManager.setTorchMode(cameraId, false);
+                    }
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                p = mCamera.getParameters();
+                p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                mCamera.setParameters(p);
+                mCamera.stopPreview();
 
-            torchCardView.setImageResource(R.drawable.ic_lightbulb_outline_black_24dp);
+                is_flash_on = false;
+                torchImageView.setImageResource(R.drawable.ic_lightbulb_outline_black_24dp);
+            }
+
         }
+
     }
 
 
+    private void turnFlashlightOn() {
+
+        if (!is_flash_on) {
+            if (mCamera == null || p == null) {
+                return;
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                try {
+                    camManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
+                    String cameraId = null; // Usually front camera is at 0 position.
+                    if (camManager != null) {
+                        cameraId = camManager.getCameraIdList()[0];
+                        camManager.setTorchMode(cameraId, true);
+                    }
+                } catch (CameraAccessException e) {
+                    Log.e("Camera", e.toString());
+                }
+            } else {
+                p = mCamera.getParameters();
+                p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                mCamera.setParameters(p);
+                mCamera.startPreview();
+                is_flash_on = true;
+                torchImageView.setImageResource(R.drawable.ic_lightbulb_outline_yellow_64dp);
+            }
+
+        }
+    }
 
 
     @Override
@@ -935,7 +966,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         // on pause turn off the flash
-        turnOffFlash();
+        turnFlashlightOff();
     }
 
     @Override
@@ -959,15 +990,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        turnOffFlash();
+        turnFlashlightOff();
 
         // on stop release the camera
-        if (camera != null) {
-            camera.release();
-
-            camera = null;
+        if (mCamera != null) {
+            mCamera.release();
+            mCamera=null;
         }
-        turnOffFlash();
     }
 }
 

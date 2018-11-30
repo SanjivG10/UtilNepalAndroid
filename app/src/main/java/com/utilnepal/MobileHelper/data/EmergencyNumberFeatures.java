@@ -4,11 +4,22 @@ public class EmergencyNumberFeatures {
 
     private String emergencyPlaceName;
     private String emergencyPlaceNumber;
+    private int imageResource;
 
-    public EmergencyNumberFeatures(String emergencyPlaceName, String emergencyPlaceNumber) {
+    public EmergencyNumberFeatures(String emergencyPlaceName, String emergencyPlaceNumber, int imageResource) {
         this.emergencyPlaceName = emergencyPlaceName;
         this.emergencyPlaceNumber = emergencyPlaceNumber;
+        this.imageResource = imageResource;
     }
+
+    public int getImageResource() {
+        return imageResource;
+    }
+
+    public void setImageResource(int imageResource) {
+        this.imageResource = imageResource;
+    }
+
 
     public String getEmergencyPlaceName() {
         return emergencyPlaceName;

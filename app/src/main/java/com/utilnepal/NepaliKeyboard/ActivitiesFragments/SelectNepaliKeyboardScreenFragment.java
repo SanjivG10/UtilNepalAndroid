@@ -16,7 +16,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.utilnepal.AdUnits;
 import com.utilnepal.R;
 
 import java.util.Timer;
@@ -26,7 +29,7 @@ public class SelectNepaliKeyboardScreenFragment extends Fragment {
 
     private static String KEYBOARDID = "com.utilnepal/.NepaliKeyboard.NepaliKeyboardService";
     public static Timer timer;
-
+    private AdView adView;
 
 
     @Nullable
@@ -35,9 +38,11 @@ public class SelectNepaliKeyboardScreenFragment extends Fragment {
 
         View v = inflater.from(getContext()).inflate(R.layout.select_nepali_keyboard_fragment,container,false);
 
-
-
-
+//        MobileAds.initialize(getContext(),AdUnits.FAKE_APP_ID);
+//        adView = v.findViewById(R.id.mainActivityAdView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        adView.loadAd(adRequest);
+//
 
         return v;
     }

@@ -2,6 +2,7 @@ package com.utilnepal.MobileHelper.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +43,7 @@ public class EmergencyNumberAdapter extends RecyclerView.Adapter<EmergencyNumber
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         myViewHolder.emergencyPlaceName.setText(emergencyNumbers.get(i).getEmergencyPlaceName());
         myViewHolder.emergencyPlaceNumber.setText(emergencyNumbers.get(i).getEmergencyPlaceNumber());
+        myViewHolder.iconForPlace.setImageResource(emergencyNumbers.get(i).getImageResource());
 
         myViewHolder.callingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,11 +57,10 @@ public class EmergencyNumberAdapter extends RecyclerView.Adapter<EmergencyNumber
                     }
                     Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(number)));
                     c.startActivity(intent);
-                    Log.e("Number", number);
                 }
                 else if(number.length()==3)
                 {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode(number)));
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(number)));
                     c.startActivity(intent);
                 }
 
@@ -76,14 +78,16 @@ public class EmergencyNumberAdapter extends RecyclerView.Adapter<EmergencyNumber
     {
         private TextView emergencyPlaceName;
         private TextView emergencyPlaceNumber;
-        private ImageView callingButton;
-
+        private Button callingButton;
+        private ImageView iconForPlace;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             emergencyPlaceName = itemView.findViewById(R.id.nameOfEmergencyPlace);
             emergencyPlaceNumber = itemView.findViewById(R.id.numberOfEmergencyPlace);
             callingButton = itemView.findViewById(R.id.callingButton);
+            iconForPlace = itemView.findViewById(R.id.iconForImage);
+
         }
     }
 }

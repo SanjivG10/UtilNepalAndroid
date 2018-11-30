@@ -21,6 +21,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.utilnepal.AdUnits;
 import com.utilnepal.AudioRecorder.adapters.AudioRecorderAdapter;
 import com.utilnepal.R;
 
@@ -34,8 +40,7 @@ public class AudioRecorderActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private Toolbar toolbar;
     private AudioRecorderAdapter mAudioRecorderAdapter;
-
-
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +54,44 @@ public class AudioRecorderActivity extends AppCompatActivity {
         mViewPager.setAdapter(mAudioRecorderAdapter);
         tabLayoutHomePage = findViewById(R.id.tabLayoutHomePage);
         tabLayoutHomePage.setupWithViewPager(mViewPager);
+
+//        MobileAds.initialize(this,
+//                AdUnits.REAL_APP_ID);
+//
+//        mInterstitialAd = new InterstitialAd(this);
+//        mInterstitialAd.setAdUnitId(AdUnits.AUDIO_RECORDER_AD_UNIT);
+//        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+//
+//        mInterstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                // Code to be executed when an ad finishes loading.
+//                mInterstitialAd.show();
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(int errorCode) {
+//                // Code to be executed when an ad request fails.
+//            }
+//
+//            @Override
+//            public void onAdOpened() {
+//                // Code to be executed when the ad is displayed.
+//            }
+//
+//            @Override
+//            public void onAdLeftApplication() {
+//                // Code to be executed when the user has left the app.
+//
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//                // Code to be executed when when the interstitial ad is closed.
+//            }
+//        });
     }
+
 
     @Override public void startActivity(Intent intent) {
         super.startActivity(intent);

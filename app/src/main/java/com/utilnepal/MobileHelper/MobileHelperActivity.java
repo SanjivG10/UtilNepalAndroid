@@ -13,9 +13,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.utilnepal.AdUnits;
 import com.utilnepal.MobileHelper.RechargeUtils.RechargeActivity;
 import com.utilnepal.MobileHelper.data.SimNumbers;
 import com.utilnepal.R;
+
+import static com.utilnepal.MobileHelper.data.SimNumbers.CallForwardCheck;
 
 public class MobileHelperActivity extends AppCompatActivity {
 
@@ -30,6 +37,7 @@ public class MobileHelperActivity extends AppCompatActivity {
     private Button NcellCallingButton;
     private Button NTCCallingButton;
 
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,47 @@ public class MobileHelperActivity extends AppCompatActivity {
         dataPackCheck = findViewById(R.id.dataPackCheck);
         callForwardCheck = findViewById(R.id.callForwardCheck);
         miscellaneousNumber = findViewById(R.id.miscelleanousNumber);
+
+        //mobile Ads
+//        MobileAds.initialize(this,
+//                AdUnits.REAL_APP_ID);
+//
+//        mInterstitialAd = new InterstitialAd(this);
+//        mInterstitialAd.setAdUnitId(AdUnits.MOBILE_HELP_AD_UNIT);
+//        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+//
+//        mInterstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                // Code to be executed when an ad finishes loading.
+//                mInterstitialAd.show();
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(int errorCode) {
+//                // Code to be executed when an ad request fails.
+//            }
+//
+//            @Override
+//            public void onAdOpened() {
+//                // Code to be executed when the ad is displayed.
+//            }
+//
+//            @Override
+//            public void onAdLeftApplication() {
+//                // Code to be executed when the user has left the app.
+//
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//                // Code to be executed when when the interstitial ad is closed.
+//            }
+//        });
+//
+//
+
+
 
 
         balanceCheck.setOnClickListener(new View.OnClickListener() {
@@ -122,25 +171,22 @@ public class MobileHelperActivity extends AppCompatActivity {
                 switch (id)
                 {
                     case R.id.balanceCheck:
-                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode(SimNumbers.NcellBalanceCheck)));
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(SimNumbers.NcellBalanceCheck)));
                         startActivity(intent);
-                        alertDialog.dismiss();
-                        break;
-                    case R.id.dataPackCheck:
-                        Intent dataIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode(SimNumbers.NcellDataPack)));
-                        startActivity(dataIntent);
-                        alertDialog.dismiss();
 
                         break;
+                    case R.id.dataPackCheck:
+                        Intent dataIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(SimNumbers.NcellDataPack)));
+                        startActivity(dataIntent);
+                        break;
                     case R.id.mobileNumberCheck:
-                        Intent numberCheckIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode(SimNumbers.NcellNumberCheck)));
+                        Intent numberCheckIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(SimNumbers.NcellNumberCheck)));
                         startActivity(numberCheckIntent);
-                        alertDialog.dismiss();
                         break;
                     case R.id.callForwardCheck:
-                        Intent callForward = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode(SimNumbers.CallForwardCheck)));
+                        Intent callForward = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(CallForwardCheck)));
                         startActivity(callForward);
-                        alertDialog.dismiss();
+
                         break;
                     case R.id.rechargeScanner:
                         Intent recharge = new Intent(getApplicationContext(),RechargeActivity.class);
@@ -160,24 +206,24 @@ public class MobileHelperActivity extends AppCompatActivity {
                 switch (id)
                 {
                     case R.id.balanceCheck:
-                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode(SimNumbers.NtcBalanceCheck)));
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(SimNumbers.NtcBalanceCheck)));
                         startActivity(intent);
-                        alertDialog.dismiss();
+
                         break;
                     case R.id.dataPackCheck:
-                        Intent dataIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode(SimNumbers.NtcDataPack)));
+                        Intent dataIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(SimNumbers.NtcDataPack)));
                         startActivity(dataIntent);
-                        alertDialog.dismiss();
                         break;
+
                     case R.id.mobileNumberCheck:
-                        Intent numberCheckIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode(SimNumbers.NtcNumberCheck)));
+                        Intent numberCheckIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(SimNumbers.NtcNumberCheck)));
                         startActivity(numberCheckIntent);
-                        alertDialog.dismiss();
+
                         break;
                     case R.id.callForwardCheck:
-                        Intent callForward = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode(SimNumbers.CallForwardCheck)));
+                        Intent callForward = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(CallForwardCheck)));
                         startActivity(callForward);
-                        alertDialog.dismiss();
+
                         break;
                     case R.id.rechargeScanner:
                         Intent recharge = new Intent(getApplicationContext(),RechargeActivity.class);
