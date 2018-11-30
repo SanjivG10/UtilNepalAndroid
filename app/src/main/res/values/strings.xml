@@ -4,6 +4,9 @@
     <string name="subtype_en_NP">Nepali (np)</string>
     <string name="balance"> पैसा चेक </string>
 
+    <string name="Close">Close</string>
+    <string name="Open">Open</string>
+
     <string name="sim_selection">कुन चाँही सिम सेलेक्ट भएको छ हेर्नुहोस्</string>
 
     <string name="add_balance"> ब्यालेन्स हाल्नुहोस   </string>
@@ -120,15 +123,24 @@
     <string name="successKeyboardText2">नेपाली किबोर्ड इनेबल भयो  </string>
 
 
-    <string name="aajhaKoMiti"> आजको मिती </string>
-
-
     <string name="rechargeViaCameraScannerInfo">
-रीचार्ज कार्ड मा भएको नम्बर कोर्नुहोस ।
-क्यामेराले त्यो कोरिहेको नम्बर मा देखाउनुहोस ।
-तल त्यो कोरिहेको नम्बर आउनेछ ।
-पछि, डन (DONE) थिच्नुहोस ।
+            रीचार्ज कार्ड मा भएको नम्बर कोर्नुहोस ।
+            क्यामेराले त्यो कोरिहेको नम्बर मा देखाउनुहोस ।
+            तल त्यो कोरिहेको नम्बर आउनेछ ।
+            पछि, डन (DONE) थिच्नुहोस ।
+    </string>
 
+    <string name="privacy_policy">
+
+        UtilNepal, an android app developed with a sole focus to help people with the utilities tools.
+        We dont store any information regarding your personal info, phone numbers. This app is not a
+        property of any company but an effort from a learning Student.
+
+        Usage:
+            The images are sole work from Android Studio and FlatIcon. So, we own no copyright of the icons and full credit goes to the owner.
+            The Recharge Scanner is from Google Vision Api.
+            We are in no contact with NTC, or Ncell Company, any reference to their name, logo is not intended
+            to infringe the laws.
 
     </string>
 

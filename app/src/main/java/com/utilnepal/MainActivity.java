@@ -1,6 +1,7 @@
 package com.utilnepal;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -9,15 +10,22 @@ import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.design.internal.NavigationMenu;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -63,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
     private CardView mobileHelpCardView;
     private CardView dateconverterCardView;
     private CardView qrCodeScannerCardView;
+
+    private NavigationView navigationView;
+    private DrawerLayout dl;
+    private ActionBarDrawerToggle t;
+    private Toolbar toolbar;
 
     private ImageView torchImageView;
 
@@ -145,10 +158,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
-
         initialize();
 
 //        MobileAds.initialize(this,AdUnits.FAKE_APP_ID);
@@ -179,14 +188,43 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, 50);
         }
 
+        navigationView =  findViewById(R.id.navigationMenu);
         torchCardView = findViewById(R.id.torchCardView);
         keyboardCardView = findViewById(R.id.keyboardCardView);
         audioRecordCardView = findViewById(R.id.audioRecordCardView);
         mobileHelpCardView = findViewById(R.id.mobileHelpCardView);
         dateconverterCardView = findViewById(R.id.dateconverterCardView);
         qrCodeScannerCardView = findViewById(R.id.qrCodeScannerCardView);
-
         torchImageView = findViewById(R.id.torchImageView);
+
+
+        toolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        dl = (DrawerLayout)findViewById(R.id.drawerLayout);
+        t = new ActionBarDrawerToggle(this, dl,R.string.Open, R.string.Close);
+
+        dl.addDrawerListener(t);
+        t.syncState();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId())
+                {
+                    case R.id.privacy_policy:
+                        buildYetAnotherDialog();
+                        return true;
+                    case R.id.developer_team:
+                        buildAnotherDialog();
+                        return true;
+
+
+                }
+                return false;
+            }
+        });
 
         torchCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,6 +291,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+
+    private void buildYetAnotherDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.setMessage( getResources().getString(R.string.privacy_policy));
+        alertDialog.setCancelable(true);
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Okay", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.cancel();
+            }
+        });
+
+        alertDialog.show();
+    }
+
+    private void buildAnotherDialog()
+    {
+        AlertDialog.Builder anotherDialogBuilder = new AlertDialog.Builder(this);
+        View dateConverterDialog = getLayoutInflater().inflate(R.layout.current_team, null);
+        anotherDialogBuilder.setView(dateConverterDialog);
+
+        AlertDialog alertDialogAnother = anotherDialogBuilder.create();
+
+        alertDialogAnother.show();
     }
 
     private void buildAlertDialog() {
@@ -955,6 +1021,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(t.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -977,7 +1052,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override

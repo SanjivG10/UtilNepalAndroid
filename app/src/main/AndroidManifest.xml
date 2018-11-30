@@ -35,7 +35,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".MobileHelp.ActivitiesFragment.MobileActivity" />
         <activity android:name=".AudioRecorder.ActivitiesFragment.AudioRecorderActivity" />
         //keyboard Service
         <service
