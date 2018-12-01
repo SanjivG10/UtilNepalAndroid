@@ -71,10 +71,10 @@ public class RechargeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (type.equals("NTC")) {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode("*412*" + numberToDail + "#")));
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode("*412*" + numberToDail + "#")));
                     startActivity(intent);
                 } else if (type.equals("NCELL")) {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Uri.encode("*102*" + numberToDail + "#")));
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode("*902*" + numberToDail + "#")));
                     startActivity(intent);
                 }
             }
@@ -187,7 +187,8 @@ public class RechargeActivity extends AppCompatActivity {
 
                                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
                            }
-                           else if(focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)){
+
+                           if(focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)){
                                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
                            }
 

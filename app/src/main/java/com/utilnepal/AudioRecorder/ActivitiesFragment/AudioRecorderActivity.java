@@ -54,7 +54,7 @@ public class AudioRecorderActivity extends AppCompatActivity {
         mViewPager.setAdapter(mAudioRecorderAdapter);
         tabLayoutHomePage = findViewById(R.id.tabLayoutHomePage);
         tabLayoutHomePage.setupWithViewPager(mViewPager);
-
+//
 //        MobileAds.initialize(this,
 //                AdUnits.REAL_APP_ID);
 //

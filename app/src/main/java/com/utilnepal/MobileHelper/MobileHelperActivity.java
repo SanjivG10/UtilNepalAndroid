@@ -91,8 +91,8 @@ public class MobileHelperActivity extends AppCompatActivity {
 //                // Code to be executed when when the interstitial ad is closed.
 //            }
 //        });
-//
-//
+
+
 
 
 

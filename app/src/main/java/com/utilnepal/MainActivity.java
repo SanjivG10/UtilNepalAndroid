@@ -8,7 +8,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
+import android.hardware.camera2.CameraMetadata;
+import android.hardware.camera2.CaptureRequest;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.internal.NavigationMenu;
@@ -88,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Camera mCamera;
     private CameraManager camManager;
-    private Context context;
+    private Boolean oldCameraUsedForNewMobile = false;
+
 
 
     // for date Converter
@@ -952,7 +956,8 @@ public class MainActivity extends AppCompatActivity {
                 mCamera = Camera.open();
                 p = mCamera.getParameters();
             } catch (RuntimeException e) {
-                Log.e("Camera Null", "Camera is null");
+                Log.e("Camera Null", "Camera is null " + e.getMessage());
+                Toast.makeText(getApplicationContext(), e.getMessage() , Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -965,23 +970,39 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
+
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                if(oldCameraUsedForNewMobile)
+                {
+                    p = mCamera.getParameters();
+                    p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                    mCamera.setParameters(p);
+                    mCamera.stopPreview();
+                    is_flash_on = false;
+                    torchImageView.setImageResource(R.drawable.ic_lightbulb_outline_black_24dp);
+                    return;
+                }
+
+
                 try {
                     String cameraId;
-                    camManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
+                    camManager = (CameraManager) this.getSystemService(Context.CAMERA_SERVICE);
                     if (camManager != null) {
                         cameraId = camManager.getCameraIdList()[0];
                         camManager.setTorchMode(cameraId, false);
                     }
                 } catch (CameraAccessException e) {
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), e.getMessage() , Toast.LENGTH_SHORT).show();
+
                 }
             } else {
                 p = mCamera.getParameters();
                 p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
                 mCamera.setParameters(p);
                 mCamera.stopPreview();
-
                 is_flash_on = false;
                 torchImageView.setImageResource(R.drawable.ic_lightbulb_outline_black_24dp);
             }
@@ -1000,14 +1021,28 @@ public class MainActivity extends AppCompatActivity {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 try {
-                    camManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
+                    camManager = (CameraManager) this.getSystemService(Context.CAMERA_SERVICE);
                     String cameraId = null; // Usually front camera is at 0 position.
                     if (camManager != null) {
+
                         cameraId = camManager.getCameraIdList()[0];
                         camManager.setTorchMode(cameraId, true);
                     }
                 } catch (CameraAccessException e) {
-                    Log.e("Camera", e.toString());
+                    try {
+                        p = mCamera.getParameters();
+                        p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                        mCamera.setParameters(p);
+                        mCamera.startPreview();
+                        is_flash_on = true;
+                        oldCameraUsedForNewMobile = true;
+                        torchImageView.setImageResource(R.drawable.ic_lightbulb_outline_yellow_64dp);
+                    }
+                    catch (Exception exception)
+                    {
+                        Toast.makeText(getApplicationContext()," Sorry, something went wrong. Flash doesn't work", Toast.LENGTH_SHORT).show();
+                        oldCameraUsedForNewMobile = false;
+                    }
                 }
             } else {
                 p = mCamera.getParameters();
@@ -1057,7 +1092,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         getCamera();
     }
 
