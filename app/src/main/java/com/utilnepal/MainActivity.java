@@ -366,7 +366,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i =0; i<nepYearList.size(); i++)
         {
             nepyearArrayString[i] = nepYearList.get(i).toString();
-            Log.e("StringNepal",nepyearArrayString[i]);
             nepyearArrayString[i] = nepyearArrayString[i].replace("1","१");
             nepyearArrayString[i] = nepyearArrayString[i].replace("2","२");
             nepyearArrayString[i] = nepyearArrayString[i].replace("3","३");
@@ -587,8 +586,6 @@ public class MainActivity extends AppCompatActivity {
                     progressbarForConverting.setVisibility(View.VISIBLE);
                     convertToEnglish.setEnabled(false);
                     convertToNepali.setEnabled(false);
-                    dateConvertedTextView.setText(" CONVERTING ");
-
                 }
 
 
@@ -611,7 +608,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Log.e("GET PROGRESSBAR", String.valueOf(progressbarForConverting.getVisibility()));
                 if(progressbarForConverting.getVisibility()== View.GONE)
                 {
                     progressbarForConverting.setVisibility(View.VISIBLE);
@@ -987,7 +983,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 try {
-                    String cameraId;
+                    String cameraId=null;
                     camManager = (CameraManager) this.getSystemService(Context.CAMERA_SERVICE);
                     if (camManager != null) {
                         cameraId = camManager.getCameraIdList()[0];
@@ -1022,7 +1018,7 @@ public class MainActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 try {
                     camManager = (CameraManager) this.getSystemService(Context.CAMERA_SERVICE);
-                    String cameraId = null; // Usually front camera is at 0 position.
+                    String cameraId = null;
                     if (camManager != null) {
 
                         cameraId = camManager.getCameraIdList()[0];

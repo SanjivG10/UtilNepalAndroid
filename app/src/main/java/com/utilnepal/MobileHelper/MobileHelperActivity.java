@@ -218,7 +218,6 @@ public class MobileHelperActivity extends AppCompatActivity {
                     case R.id.mobileNumberCheck:
                         Intent numberCheckIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(SimNumbers.NtcNumberCheck)));
                         startActivity(numberCheckIntent);
-
                         break;
                     case R.id.callForwardCheck:
                         Intent callForward = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(CallForwardCheck)));
@@ -231,13 +230,10 @@ public class MobileHelperActivity extends AppCompatActivity {
                         alertDialog.dismiss();
                         startActivity(recharge);
                         break;
-
-
                 }
 
             }
         });
-
         alertDialog.show();
     }
 }

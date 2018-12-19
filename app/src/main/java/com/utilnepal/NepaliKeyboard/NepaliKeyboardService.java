@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 
@@ -20,6 +21,24 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
     private KeyboardView kv;
     private Keyboard keyboard;
     private EditorInfo sEditorInfo;
+
+    private CompletionInfo[] mCompletions;
+
+    private StringBuilder mComposing = new StringBuilder();
+    private boolean mPredictionOn;
+    private boolean mCompletionOn;
+    private int mLastDisplayWidth;
+    private boolean mCapsLock;
+    private long mLastShiftTime;
+    private long mMetaState;
+
+//    private LatinKeyboard mSymbolsKeyboard;
+//    private LatinKeyboard mSymbolsShiftedKeyboard;
+//    private LatinKeyboard mQwertyKeyboard;
+//
+//    private LatinKeyboard mCurKeyboard;
+
+    private String mWordSeparators;
 
 
     //forCapsLock
@@ -194,4 +213,10 @@ public class NepaliKeyboardService extends InputMethodService implements Keyboar
 
     }
 
+    @Override
+    public View onCreateCandidatesView() {
+        CandidateView cd = new CandidateView(getApplicationContext());
+        setCandidatesViewShown(true);
+        return cd;
+    }
 }

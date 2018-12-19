@@ -18,6 +18,11 @@
     <color name="color5">#009FFF</color>
     <color name="color6">#FF4B2B</color>
 
+    <color name="candidate_background">#b2b2b2</color>
+    <color name="candidate_normal">#6200EE</color>
+    <color name="candidate_other">#b2b2b2</color>
+    <color name="candidate_recommended">#3700B3</color>
+
 
 
 </resources>

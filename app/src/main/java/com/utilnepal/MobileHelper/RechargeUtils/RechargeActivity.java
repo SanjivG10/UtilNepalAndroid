@@ -102,7 +102,7 @@ public class RechargeActivity extends AppCompatActivity {
 
 
         if (!textRecognizer.isOperational()) {
-            Log.w("MainActivity", "Detector dependencies are not yet available");
+            Toast.makeText(getApplicationContext(), " Failed to Download Dependency ", Toast.LENGTH_SHORT).show();
         } else {
 
             oldCameraSource = new CameraSource.Builder(getApplicationContext(), textRecognizer)
@@ -151,9 +151,6 @@ public class RechargeActivity extends AppCompatActivity {
                     }
                 }
             });
-
-
-
 
             // focus on Click
             oldSurfaceView.setOnClickListener(new View.OnClickListener() {
